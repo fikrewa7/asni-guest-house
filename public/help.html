@@ -1,0 +1,2516 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" class="h-full">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Help &amp; Support — Asni Guest House</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+Ethiopic:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   THEME TOKENS (same as main app)
+   ============================================================ */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:           #05080f;
+  --bg-elev:      #0b1220;
+  --panel:        rgba(30, 41, 59, 0.7);
+  --panel-soft:   rgba(51, 65, 85, 0.4);
+  --border:       rgba(148, 163, 184, 0.14);
+  --border-soft:  rgba(148, 163, 184, 0.08);
+  --text:         #e2e8f0;
+  --text-strong:  #ffffff;
+  --text-mid:     #cbd5e1;
+  --muted:        #94a3b8;
+  --input-bg:     #1e293b;
+  --input-border: #334155;
+  --code-bg:      #060a12;
+  --shadow:       0 25px 50px -12px rgba(0,0,0,0.9);
+
+  --amber: #f59e0b;   --amber-soft: rgba(245,158,11,0.15);
+  --emerald: #10b981; --emerald-soft: rgba(16,185,129,0.15);
+  --sky: #0ea5e9;     --sky-soft: rgba(14,165,233,0.15);
+  --rose: #f43f5e;    --rose-soft: rgba(244,63,94,0.15);
+  --indigo: #6366f1;  --indigo-soft: rgba(99,102,241,0.15);
+  --purple: #a855f7;  --purple-soft: rgba(168,85,247,0.15);
+  --teal: #14b8a6;    --teal-soft: rgba(20,184,166,0.15);
+}
+
+[data-theme="light"] {
+  --bg:           #f1f5f9;
+  --bg-elev:      #ffffff;
+  --panel:        rgba(255, 255, 255, 0.9);
+  --panel-soft:   rgba(241, 245, 249, 0.9);
+  --border:       rgba(15, 23, 42, 0.10);
+  --border-soft:  rgba(15, 23, 42, 0.06);
+  --text:         #334155;
+  --text-strong:  #0f172a;
+  --text-mid:     #475569;
+  --muted:        #64748b;
+  --input-bg:     #f8fafc;
+  --input-border: #cbd5e1;
+  --code-bg:      #f1f5f9;
+  --shadow:       0 20px 40px -15px rgba(15,23,42,0.15);
+}
+
+html, body { height: 100%; }
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.25s ease, color 0.25s ease;
+  line-height: 1.55;
+}
+
+body.lang-am { font-family: 'Noto Sans Ethiopic', 'Inter', sans-serif; }
+
+/* ============================================================
+   APP SHELL — same fixed-viewport pattern as main app
+   ============================================================ */
+.help-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.help-header {
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 0.6rem 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-shrink: 0;
+  z-index: 20;
+}
+@media (min-width: 640px) { .help-header { padding: 0.65rem 1.25rem; } }
+
+.header-left { display: flex; align-items: center; gap: 0.7rem; min-width: 0; }
+.header-right { display: flex; align-items: center; gap: 0.45rem; }
+
+.logo-mark {
+  width: 38px; height: 38px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #10b981, #f59e0b 55%, #f43f5e);
+  display: grid; place-items: center;
+  font-weight: 900; color: #0b1220; font-size: 1.1rem;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.brand { min-width: 0; }
+.brand-title {
+  font-size: 0.9rem; font-weight: 800;
+  color: var(--amber);
+  display: flex; align-items: center; gap: 0.4rem;
+  line-height: 1.1;
+}
+@media (min-width: 640px) { .brand-title { font-size: 1rem; } }
+.brand-chip {
+  font-size: 9px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  padding: 0.15rem 0.45rem; border-radius: 6px;
+  background: var(--amber-soft); color: #fcd34d;
+  border: 1px solid rgba(245,158,11,0.35);
+}
+.brand-sub { font-size: 0.7rem; color: var(--muted); }
+
+.icon-btn {
+  width: 36px; height: 36px;
+  display: grid; place-items: center;
+  background: var(--panel-soft);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text-mid);
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.15s;
+  text-decoration: none;
+}
+.icon-btn:hover { background: var(--amber-soft); color: var(--amber); border-color: rgba(245,158,11,0.4); }
+
+.lang-btn {
+  height: 36px;
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0 0.75rem;
+  background: var(--panel-soft);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text-mid);
+  cursor: pointer;
+  font-size: 0.72rem; font-weight: 700;
+  transition: all 0.15s;
+}
+.lang-btn:hover { background: var(--sky-soft); color: var(--sky); border-color: rgba(14,165,233,0.4); }
+
+.back-btn {
+  height: 36px;
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0 0.85rem;
+  background: var(--amber);
+  color: #0f172a;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.75rem; font-weight: 800;
+  text-decoration: none;
+  transition: all 0.15s;
+}
+.back-btn:hover { filter: brightness(1.1); transform: translateY(-1px); }
+
+/* ============================================================
+   BODY
+   ============================================================ */
+.help-body {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ============================================================
+   SIDEBAR (TOC)
+   ============================================================ */
+.help-sidebar {
+  width: 17rem;
+  flex-shrink: 0;
+  background: var(--panel);
+  border-right: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform 0.25s ease;
+}
+
+@media (max-width: 900px) {
+  .help-sidebar {
+    position: absolute;
+    top: 0; left: 0;
+    height: 100%;
+    z-index: 40;
+    transform: translateX(-100%);
+    box-shadow: 0 0 40px rgba(0,0,0,0.4);
+  }
+  .help-sidebar.is-open { transform: translateX(0); }
+}
+
+.sidebar-search {
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.search-wrap {
+  position: relative;
+}
+.search-wrap i {
+  position: absolute;
+  left: 0.75rem; top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  font-size: 0.75rem;
+  pointer-events: none;
+}
+.search-input {
+  width: 100%;
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  color: var(--text);
+  font-size: 0.78rem;
+  padding: 0.55rem 0.75rem 0.55rem 2rem;
+  border-radius: 10px;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.15s;
+}
+.search-input:focus { border-color: var(--amber); }
+
+.sidebar-nav {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.5rem 0.6rem 0.75rem;
+}
+
+.sidebar-label {
+  padding: 0.6rem 0.5rem 0.35rem;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+
+.toc-link {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0.7rem;
+  border-radius: 9px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-mid);
+  text-decoration: none;
+  transition: all 0.15s;
+  margin-bottom: 0.1rem;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+}
+.toc-link:hover { background: var(--panel-soft); color: var(--text-strong); }
+.toc-link.active {
+  background: var(--amber-soft);
+  color: #fcd34d;
+  font-weight: 700;
+  border-left: 3px solid var(--amber);
+  padding-left: calc(0.7rem - 3px);
+}
+.toc-link .toc-icon {
+  width: 1rem; text-align: center;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.toc-link.active .toc-icon { color: var(--amber); }
+.toc-link.is-hidden { display: none; }
+
+.sidebar-foot {
+  padding: 0.75rem;
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.sidebar-foot-row {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 11px; color: var(--muted);
+  margin-bottom: 0.3rem;
+}
+.sidebar-foot-chip {
+  font-weight: 800; color: var(--amber);
+  background: var(--amber-soft);
+  padding: 0.1rem 0.45rem;
+  border-radius: 6px;
+  border: 1px solid rgba(245,158,11,0.3);
+  font-size: 10px;
+}
+
+/* ============================================================
+   MAIN CONTENT
+   ============================================================ */
+.help-main {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 1.25rem 1rem;
+}
+@media (min-width: 768px) { .help-main { padding: 2rem 2.5rem; } }
+@media (min-width: 1200px) { .help-main { padding: 2.5rem 4rem; } }
+
+.content-inner {
+  max-width: 62rem;
+  margin: 0 auto;
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  background: linear-gradient(135deg, var(--emerald-soft), var(--panel), var(--amber-soft));
+  border: 1px solid var(--amber-soft);
+  border-radius: 16px;
+  padding: 1.75rem 1.5rem;
+  margin-bottom: 2rem;
+  backdrop-filter: blur(10px);
+}
+@media (min-width: 640px) { .hero { padding: 2.25rem 2rem; } }
+
+.hero-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--amber);
+  background: var(--amber-soft);
+  border: 1px solid rgba(245,158,11,0.3);
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  margin-bottom: 1rem;
+}
+.hero h1 {
+  font-size: 1.75rem;
+  font-weight: 900;
+  color: var(--text-strong);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.6rem;
+}
+@media (min-width: 640px) { .hero h1 { font-size: 2.25rem; } }
+
+.hero p {
+  color: var(--text-mid);
+  font-size: 0.95rem;
+  max-width: 55ch;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.btn-hero {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+.btn-hero.primary { background: var(--amber); color: #0f172a; }
+.btn-hero.secondary {
+  background: var(--panel-soft);
+  color: var(--text-mid);
+  border: 1px solid var(--border);
+}
+.btn-hero:hover { filter: brightness(1.1); transform: translateY(-1px); }
+
+/* ============================================================
+   QUICK STATS
+   ============================================================ */
+.quick-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.65rem;
+  margin-bottom: 2rem;
+}
+@media (min-width: 640px) { .quick-stats { grid-template-columns: repeat(4, 1fr); gap: 0.85rem; } }
+
+.qstat {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--amber);
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+  backdrop-filter: blur(8px);
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.15s;
+  display: block;
+}
+.qstat:hover { transform: translateY(-2px); border-color: var(--amber); }
+.qstat.emerald { border-left-color: var(--emerald); }
+.qstat.sky     { border-left-color: var(--sky); }
+.qstat.rose    { border-left-color: var(--rose); }
+
+.qstat-num {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--text-strong);
+  line-height: 1;
+  margin-bottom: 0.3rem;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+}
+.qstat-lbl {
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+/* ============================================================
+   SECTIONS
+   ============================================================ */
+.section {
+  margin-bottom: 2.5rem;
+  scroll-margin-top: 1rem;
+}
+.section.is-hidden { display: none; }
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--border);
+}
+
+.section-icon {
+  width: 42px; height: 42px;
+  border-radius: 12px;
+  display: grid; place-items: center;
+  font-size: 1.05rem;
+  flex-shrink: 0;
+}
+.section-icon.amber   { background: var(--amber-soft);   color: var(--amber); }
+.section-icon.emerald { background: var(--emerald-soft); color: #6ee7b7; }
+.section-icon.sky     { background: var(--sky-soft);     color: #7dd3fc; }
+.section-icon.rose    { background: var(--rose-soft);    color: #fda4af; }
+.section-icon.indigo  { background: var(--indigo-soft);  color: #a5b4fc; }
+.section-icon.purple  { background: var(--purple-soft);  color: #d8b4fe; }
+.section-icon.teal    { background: var(--teal-soft);    color: #5eead4; }
+
+.section-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-strong);
+  line-height: 1.2;
+}
+@media (min-width: 640px) { .section-title { font-size: 1.35rem; } }
+
+.section-sub {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-top: 0.15rem;
+}
+
+/* ============================================================
+   CARDS
+   ============================================================ */
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.1rem 1.15rem;
+  backdrop-filter: blur(10px);
+  margin-bottom: 0.85rem;
+}
+@media (min-width: 640px) { .card { padding: 1.25rem 1.35rem; } }
+
+.card-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-strong);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.6rem;
+}
+.card-title i { color: var(--amber); font-size: 0.9rem; }
+
+.card-body {
+  font-size: 0.85rem;
+  color: var(--text-mid);
+  line-height: 1.65;
+}
+.card-body + .card-body { margin-top: 0.6rem; }
+.card-body strong { color: var(--text-strong); }
+.card-body code {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.1rem 0.4rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78em;
+  color: var(--amber);
+}
+
+/* ============================================================
+   STEPS
+   ============================================================ */
+.steps { counter-reset: step; padding-left: 0; list-style: none; }
+.steps li {
+  position: relative;
+  padding-left: 2.5rem;
+  margin-bottom: 0.85rem;
+  font-size: 0.85rem;
+  color: var(--text-mid);
+  line-height: 1.6;
+}
+.steps li::before {
+  counter-increment: step;
+  content: counter(step);
+  position: absolute;
+  left: 0; top: 0;
+  width: 1.75rem; height: 1.75rem;
+  border-radius: 50%;
+  background: var(--amber-soft);
+  border: 1px solid rgba(245,158,11,0.4);
+  color: var(--amber);
+  display: grid; place-items: center;
+  font-size: 0.75rem;
+  font-weight: 800;
+  font-family: 'JetBrains Mono', monospace;
+}
+.steps li strong { color: var(--text-strong); }
+.steps li code {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.05rem 0.35rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82em;
+  color: var(--amber);
+}
+
+/* ============================================================
+   ROLE CARDS (mini role table)
+   ============================================================ */
+.role-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+@media (min-width: 768px) { .role-grid { grid-template-columns: 1fr 1fr 1fr; } }
+
+.role-card {
+  background: var(--panel-soft);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+.role-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+.role-card.admin::before        { background: var(--rose); }
+.role-card.receptionist::before { background: var(--sky); }
+.role-card.guest::before        { background: var(--emerald); }
+
+.role-card-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.75rem;
+}
+.role-card.admin        .role-card-head { color: #fda4af; }
+.role-card.receptionist .role-card-head { color: #7dd3fc; }
+.role-card.guest        .role-card-head { color: #6ee7b7; }
+
+.role-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--text-mid);
+}
+.role-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+  padding: 0.25rem 0;
+}
+.role-list li.yes::before { content: '✓'; color: #10b981; font-weight: 900; }
+.role-list li.no::before  { content: '✕'; color: #f43f5e; font-weight: 900; }
+.role-list li.partial::before { content: '◐'; color: #f59e0b; font-weight: 900; }
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+.faq-item {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+  transition: all 0.2s;
+}
+.faq-item[open] {
+  border-color: rgba(245,158,11,0.4);
+  box-shadow: 0 8px 24px -8px rgba(0,0,0,0.4);
+}
+
+.faq-q {
+  padding: 0.9rem 1.1rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-strong);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  list-style: none;
+  user-select: none;
+}
+.faq-q::-webkit-details-marker { display: none; }
+.faq-q::after {
+  content: '\f078';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  font-size: 0.7rem;
+  color: var(--muted);
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+.faq-item[open] .faq-q::after { transform: rotate(180deg); color: var(--amber); }
+
+.faq-a {
+  padding: 0 1.1rem 0.9rem;
+  font-size: 0.82rem;
+  color: var(--text-mid);
+  line-height: 1.65;
+  border-top: 1px solid var(--border-soft);
+  padding-top: 0.75rem;
+}
+.faq-a code {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.05rem 0.35rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82em;
+  color: var(--amber);
+}
+.faq-a strong { color: var(--text-strong); }
+
+/* ============================================================
+   KBD
+   ============================================================ */
+kbd {
+  display: inline-block;
+  padding: 0.15rem 0.45rem;
+  background: var(--panel-soft);
+  border: 1px solid var(--border);
+  border-bottom-width: 2px;
+  border-radius: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75em;
+  color: var(--text-strong);
+  min-width: 1.5rem;
+  text-align: center;
+}
+
+/* ============================================================
+   SHORTCUT TABLE
+   ============================================================ */
+.shortcut-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+.shortcut-table thead th {
+  text-align: left;
+  padding: 0.6rem 0.75rem;
+  background: var(--panel-soft);
+  color: var(--muted);
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.shortcut-table thead th:first-child { border-radius: 8px 0 0 8px; }
+.shortcut-table thead th:last-child  { border-radius: 0 8px 8px 0; }
+.shortcut-table tbody td {
+  padding: 0.65rem 0.75rem;
+  border-top: 1px solid var(--border-soft);
+  color: var(--text-mid);
+  vertical-align: middle;
+}
+.shortcut-table tbody tr:hover { background: var(--panel-soft); }
+.shortcut-table td:first-child { color: var(--text-strong); font-weight: 600; }
+
+/* ============================================================
+   CONTACT CARDS
+   ============================================================ */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.85rem;
+}
+@media (min-width: 640px) { .contact-grid { grid-template-columns: 1fr 1fr; } }
+
+.contact-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.15rem;
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+  transition: all 0.15s;
+  text-decoration: none;
+  color: inherit;
+}
+.contact-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--amber);
+  box-shadow: 0 12px 30px -10px rgba(0,0,0,0.4);
+}
+
+.contact-icon {
+  width: 42px; height: 42px;
+  border-radius: 12px;
+  display: grid; place-items: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+.contact-icon.amber   { background: var(--amber-soft);   color: var(--amber); }
+.contact-icon.sky     { background: var(--sky-soft);     color: #7dd3fc; }
+.contact-icon.emerald { background: var(--emerald-soft); color: #6ee7b7; }
+.contact-icon.rose    { background: var(--rose-soft);    color: #fda4af; }
+
+.contact-info { min-width: 0; }
+.contact-label {
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-bottom: 0.2rem;
+}
+.contact-value {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-strong);
+  word-break: break-word;
+  margin-bottom: 0.15rem;
+}
+.contact-desc {
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+/* ============================================================
+   ALERTS / CALLOUTS
+   ============================================================ */
+.callout {
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  margin: 0.85rem 0;
+  border: 1px solid;
+}
+.callout i { font-size: 0.95rem; flex-shrink: 0; margin-top: 0.15rem; }
+.callout.info    { background: var(--sky-soft);     border-color: rgba(14,165,233,0.35);  color: var(--text-mid); }
+.callout.info i  { color: var(--sky); }
+.callout.warn    { background: var(--amber-soft);   border-color: rgba(245,158,11,0.35);  color: var(--text-mid); }
+.callout.warn i  { color: var(--amber); }
+.callout.danger  { background: var(--rose-soft);    border-color: rgba(244,63,94,0.35);   color: var(--text-mid); }
+.callout.danger i{ color: var(--rose); }
+.callout.success { background: var(--emerald-soft); border-color: rgba(16,185,129,0.35);  color: var(--text-mid); }
+.callout.success i{ color: var(--emerald); }
+.callout strong { color: var(--text-strong); }
+
+/* ============================================================
+   NO RESULTS
+   ============================================================ */
+.no-results {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--muted);
+}
+.no-results i { font-size: 2.5rem; margin-bottom: 0.75rem; opacity: 0.5; }
+.no-results h3 { font-size: 1.1rem; color: var(--text-strong); margin-bottom: 0.4rem; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.help-footer {
+  padding: 1.5rem 1.5rem 2rem;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  margin-top: 3rem;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+.help-footer strong { color: var(--amber); }
+.help-footer a { color: var(--amber); text-decoration: none; }
+.help-footer a:hover { text-decoration: underline; }
+
+/* ============================================================
+   MOBILE MENU BUTTON
+   ============================================================ */
+@media (min-width: 901px) { .menu-toggle { display: none; } }
+
+/* ============================================================
+   PRINT
+   ============================================================ */
+@media print {
+  .help-sidebar, .help-header, .menu-toggle, .back-btn { display: none !important; }
+  body { background: #fff !important; color: #000 !important; overflow: visible !important; }
+  .help-shell { height: auto !important; overflow: visible !important; }
+  .help-body { display: block !important; }
+  .help-main { padding: 0 !important; overflow: visible !important; }
+  .card, .qstat, .role-card, .faq-item, .contact-card { border-color: #ddd !important; background: #fff !important; box-shadow: none !important; }
+  .faq-item[open] .faq-a { display: block !important; }
+  .hero { background: #f5f5f5 !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="help-shell">
+
+  <!-- ============================
+       HEADER
+       ============================ -->
+  <header class="help-header">
+    <div class="header-left">
+      <button class="icon-btn menu-toggle" id="menuToggle" title="Menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <a href="index.html" class="logo-mark" title="Home">A</a>
+      <div class="brand">
+        <h1 class="brand-title">
+          <span data-i18n="help_title">Help &amp; Support</span>
+          <span class="brand-chip">Guide</span>
+        </h1>
+        <p class="brand-sub" data-i18n="help_sub">Everything you need to use Asni Guest House</p>
+      </div>
+    </div>
+    <div class="header-right">
+      <button class="icon-btn" id="themeToggle" title="Toggle theme">
+        <i class="fa-solid fa-moon" id="themeIcon"></i>
+      </button>
+      <button class="lang-btn" id="langToggle" title="Change language">
+        <i class="fa-solid fa-language"></i>
+        <span id="langLabel">EN</span>
+      </button>
+      <a href="index.html" class="back-btn">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span data-i18n="back_to_app">Back to App</span>
+      </a>
+    </div>
+  </header>
+
+  <div class="help-body">
+
+    <!-- ============================
+         SIDEBAR (TOC)
+         ============================ -->
+    <aside class="help-sidebar" id="sidebar">
+      <div class="sidebar-search">
+        <div class="search-wrap">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" class="search-input" id="searchInput" placeholder="Search help…" data-i18n-placeholder="search_placeholder">
+        </div>
+      </div>
+
+      <nav class="sidebar-nav" id="tocNav">
+        <div class="sidebar-label" data-i18n="toc_getting_started">Getting Started</div>
+        <a class="toc-link active" href="#intro" data-target="intro" data-keywords="welcome introduction overview start">
+          <i class="fa-solid fa-flag toc-icon"></i><span data-i18n="toc_intro">Introduction</span>
+        </a>
+        <a class="toc-link" href="#getting-started" data-target="getting-started" data-keywords="login setup first time connect">
+          <i class="fa-solid fa-rocket toc-icon"></i><span data-i18n="toc_start">Getting Started</span>
+        </a>
+        <a class="toc-link" href="#roles" data-target="roles" data-keywords="admin receptionist guest permissions access">
+          <i class="fa-solid fa-user-shield toc-icon"></i><span data-i18n="toc_roles">Roles &amp; Permissions</span>
+        </a>
+
+        <div class="sidebar-label" data-i18n="toc_features">Features</div>
+        <a class="toc-link" href="#dashboard" data-target="dashboard" data-keywords="dashboard kpi revenue chart analytics">
+          <i class="fa-solid fa-chart-pie toc-icon"></i><span data-i18n="toc_dashboard">Dashboard</span>
+        </a>
+        <a class="toc-link" href="#rooms-help" data-target="rooms-help" data-keywords="rooms manage inventory pricing status">
+          <i class="fa-solid fa-bed toc-icon"></i><span data-i18n="toc_rooms">Managing Rooms</span>
+        </a>
+        <a class="toc-link" href="#bookings-help" data-target="bookings-help" data-keywords="bookings reservations check-in check-out">
+          <i class="fa-solid fa-calendar-check toc-icon"></i><span data-i18n="toc_bookings">Bookings</span>
+        </a>
+        <a class="toc-link" href="#restaurant-help" data-target="restaurant-help" data-keywords="restaurant menu orders kitchen food dishes">
+          <i class="fa-solid fa-utensils toc-icon"></i><span data-i18n="toc_restaurant">Restaurant &amp; Orders</span>
+        </a>
+        <a class="toc-link" href="#tables-help" data-target="tables-help" data-keywords="tables seating zones garden rooftop">
+          <i class="fa-solid fa-chair toc-icon"></i><span data-i18n="toc_tables">Restaurant Tables</span>
+        </a>
+        <a class="toc-link" href="#users-help" data-target="users-help" data-keywords="users staff accounts roles admin">
+          <i class="fa-solid fa-users toc-icon"></i><span data-i18n="toc_users">Users &amp; Staff</span>
+        </a>
+        <a class="toc-link" href="#reports-help" data-target="reports-help" data-keywords="reports financial revenue csv export ledger">
+          <i class="fa-solid fa-file-invoice-dollar toc-icon"></i><span data-i18n="toc_reports">Financial Reports</span>
+        </a>
+        <a class="toc-link" href="#banners-help" data-target="banners-help" data-keywords="banners ads promotions">
+          <i class="fa-solid fa-bullhorn toc-icon"></i><span data-i18n="toc_banners">Ad Banners</span>
+        </a>
+        <a class="toc-link" href="#sql-help" data-target="sql-help" data-keywords="sql console d1 database query admin">
+          <i class="fa-solid fa-database toc-icon"></i><span data-i18n="toc_sql">SQL Console</span>
+        </a>
+
+        <div class="sidebar-label" data-i18n="toc_settings">Settings</div>
+        <a class="toc-link" href="#themes" data-target="themes" data-keywords="theme dark light mode appearance">
+          <i class="fa-solid fa-circle-half-stroke toc-icon"></i><span data-i18n="toc_theme">Themes</span>
+        </a>
+        <a class="toc-link" href="#languages" data-target="languages" data-keywords="language amharic english translation locale">
+          <i class="fa-solid fa-language toc-icon"></i><span data-i18n="toc_lang">Languages</span>
+        </a>
+
+        <div class="sidebar-label" data-i18n="toc_trouble">Troubleshooting</div>
+        <a class="toc-link" href="#shortcuts" data-target="shortcuts" data-keywords="keyboard shortcuts hotkeys">
+          <i class="fa-solid fa-keyboard toc-icon"></i><span data-i18n="toc_shortcuts">Keyboard Shortcuts</span>
+        </a>
+        <a class="toc-link" href="#faq" data-target="faq" data-keywords="faq questions answers problems">
+          <i class="fa-solid fa-circle-question toc-icon"></i><span data-i18n="toc_faq">FAQ</span>
+        </a>
+        <a class="toc-link" href="#troubleshooting" data-target="troubleshooting" data-keywords="errors offline connection problems">
+          <i class="fa-solid fa-wrench toc-icon"></i><span data-i18n="toc_troubleshoot">Common Issues</span>
+        </a>
+        <a class="toc-link" href="#contact" data-target="contact" data-keywords="contact support email phone help">
+          <i class="fa-solid fa-headset toc-icon"></i><span data-i18n="toc_contact">Contact Support</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-foot">
+        <div class="sidebar-foot-row">
+          <span data-i18n="version">Version</span>
+          <span class="sidebar-foot-chip">v3.0</span>
+        </div>
+        <div style="font-size:9px; color:var(--muted); text-align:center;">Asni Guest House · Jimma</div>
+      </div>
+    </aside>
+
+    <!-- ============================
+         MAIN CONTENT
+         ============================ -->
+    <main class="help-main" id="mainContent">
+      <div class="content-inner">
+
+        <!-- ============================
+             HERO
+             ============================ -->
+        <div class="hero" id="intro">
+          <span class="hero-kicker"><i class="fa-solid fa-book-open"></i> <span data-i18n="hero_kicker">User Guide</span></span>
+          <h1 data-i18n="hero_title">Welcome to Asni Guest House</h1>
+          <p data-i18n="hero_sub">
+            A complete guide to using the Asni Guest House management system.
+            Learn how to manage rooms, bookings, restaurant orders, staff accounts,
+            and financial reports — for admins, receptionists, and guests.
+          </p>
+          <div class="hero-actions">
+            <a href="#getting-started" class="btn-hero primary">
+              <i class="fa-solid fa-rocket"></i>
+              <span data-i18n="btn_get_started">Get Started</span>
+            </a>
+            <a href="#faq" class="btn-hero secondary">
+              <i class="fa-solid fa-circle-question"></i>
+              <span data-i18n="btn_view_faq">View FAQ</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick stats -->
+        <div class="quick-stats">
+          <a href="#rooms-help" class="qstat emerald">
+            <div class="qstat-num">9</div>
+            <div class="qstat-lbl" data-i18n="qs_modules">Modules</div>
+          </a>
+          <a href="#roles" class="qstat sky">
+            <div class="qstat-num">3</div>
+            <div class="qstat-lbl" data-i18n="qs_roles">User Roles</div>
+          </a>
+          <a href="#shortcuts" class="qstat">
+            <div class="qstat-num">10+</div>
+            <div class="qstat-lbl" data-i18n="qs_shortcuts">Shortcuts</div>
+          </a>
+          <a href="#contact" class="qstat rose">
+            <div class="qstat-num">24/7</div>
+            <div class="qstat-lbl" data-i18n="qs_support">Support</div>
+          </a>
+        </div>
+
+        <!-- ============================
+             GETTING STARTED
+             ============================ -->
+        <section class="section" id="getting-started">
+          <div class="section-header">
+            <div class="section-icon emerald"><i class="fa-solid fa-rocket"></i></div>
+            <div>
+              <h2 class="section-title" data-i18n="gs_title">Getting Started</h2>
+              <p class="section-sub" data-i18n="gs_sub">Your first 5 minutes with the app</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><i class="fa-solid fa-1"></i> <span data-i18n="gs_step1_title">Open the app</span></div>
+            <div class="card-body" data-i18n="gs_step1_body">
+              Visit <strong>asni-guest-house.vercel.app</strong> in any modern browser
+              (Chrome, Edge, Firefox, or Safari). The app loads instantly — no installation required.
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><i class="fa-solid fa-2"></i> <span data-i18n="gs_step2_title">Choose your role</span></div>
+            <div class="card-body" data-i18n="gs_step2_body">
+              Use the role dropdown in the top-right of the header to switch between
+              <strong>Admin</strong>, <strong>Receptionist</strong>, and <strong>Guest</strong> views.
+              The colour of the top bar and the visible menu items change instantly.
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><i class="fa-solid fa-3"></i> <span data-i18n="gs_step3_title">Explore the sidebar</span></div>
+            <div class="card-body" data-i18n="gs_step3_body">
+              The left sidebar is your main navigation. Click any item to jump to that module.
+              On mobile, tap the <i class="fa-solid fa-bars"></i> menu icon to reveal it.
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><i class="fa-solid fa-4"></i> <span data-i18n="gs_step4_title">Try adding a record</span></div>
+            <div class="card-body" data-i18n="gs_step4_body">
+              Start with <strong>Rooms</strong> → click <strong>Add Room</strong>. Fill in the form and press
+              <strong>Save Room</strong>. A green toast confirms the save and the new room appears
+              in the table instantly.
+            </div>
+          </div>
+
+          <div class="callout info">
+            <i class="fa-solid fa-circle-info"></i>
+            <div>
+              <strong data-i18n="gs_tip">Tip:</strong>
+              <span data-i18n="gs_tip_body">The app works offline. If the network is down, you'll see "D1 Offline — Local Cache" in the header and everything still works with cached data.</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================
+             ROLES & PERMISSIONS
+             ============================ -->
+        <section class="section" id="roles">
+          <div class="section-header">
+            <div class="section-icon indigo"><i class="fa-solid fa-user-shield"></i></div>
+            <div>
+              <h2 class="section-title" data-i18n="roles_title">Roles &amp; Permissions</h2>
+              <p class="section-sub" data-i18n="roles_sub">What each user type can see and do</p>
+            </div>
+          </div>
+
+          <div class="role-grid">
+            <div class="role-card admin">
+              <div class="role-card-head">
+                <i class="fa-solid fa-user-shield"></i>
+                <span data-i18n="role_admin_full">Admin</span>
+              </div>
+              <ul class="role-list">
+                <li class="yes" data-i18n="rp_admin_dash">Full dashboard access</li>
+                <li class="yes" data-i18n="rp_admin_rooms">Manage rooms, pricing, availability</li>
+                <li class="yes" data-i18n="rp_admin_users">Create &amp; edit staff accounts</li>
+                <li class="yes" data-i18n="rp_admin_bookings">Full booking control</li>
+                <li class="yes" data-i18n="rp_admin_finance">Financial reports &amp; CSV export</li>
+                <li class="yes" data-i18n="rp_admin_sql">SQL console &amp; schema reset</li>
+              </ul>
+            </div>
+
+            <div class="role-card receptionist">
+              <div class="role-card-head">
+                <i class="fa-solid fa-headset"></i>
+                <span data-i18n="role_recept_full">Receptionist</span>
+              </div>
+              <ul class="role-list">
+                <li class="yes" data-i18n="rp_recept_dash">Dashboard (no revenue details)</li>
+                <li class="yes" data-i18n="rp_recept_rooms">View &amp; update room status</li>
+                <li class="yes" data-i18n="rp_recept_users">View users (no delete)</li>
+                <li class="yes" data-i18n="rp_recept_bookings">Create &amp; manage bookings</li>
+                <li class="yes" data-i18n="rp_recept_orders">Restaurant &amp; kitchen orders</li>
+                <li class="no" data-i18n="rp_recept_finance">No financial reports</li>
+                <li class="no" data-i18n="rp_recept_sql">No SQL console access</li>
+              </ul>
+            </div>
+
+            <div class="role-card guest">
+              <div class="role-card-head">
+                <i class="fa-solid fa-user"></i>
+                <span data-i18n="role_guest_full">Guest</span>
+              </div>
+              <ul class="role-list">
+                <li class="yes" data-i18n="rp_guest_dash">Dashboard overview</li>
+                <li class="yes" data-i18n="rp_guest_rooms">View room availability</li>
+                <li class="yes" data-i18n="rp_guest_bookings">View own bookings</li>
+                <li class="yes" data-i18n="rp_guest_menu">Browse menu &amp; place orders</li>
+                <li class="no" data-i18n="rp_guest_users">No user management</li>
+                <li class="no" data-i18n="rp_guest_finance">No financial data</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="callout warn" style="margin-top:1rem;">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <div>
+              <strong data-i18n="roles_switch">Switching roles:</strong>
+              <span data-i18n="roles_switch_body">Use the dropdown in the header. Your choice is remembered across sessions. If you switch to Guest while viewing a restricted page, you'll be automatically redirected to the Dashboard.</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================
+             DASHBOARD
+             ============================ -->
+        <section class="section" id="dashboard">
+          <div class="section-header">
+            <div class="section-icon amber"><i class="fa-solid fa-chart-pie"></i></div>
+            <div>
+              <h2 class="section-title" data-i18n="dash_help_title">Dashboard Overview</h2>
+              <p class="section-sub" data-i18n="dash_help_sub">Your at-a-glance command centre</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><i class="fa-solid fa-money-bill-wave"></i> <span data-i18n="dh_kpi">The four KPI cards</span></div>
+            <div class="card-body" data-i18n="dh_kpi_body">
+              The top row shows real-time metrics: <strong>Total Revenue</strong> (rooms + dining),
+              <strong>Occupancy Rate</strong> (percentage of rooms currently occupied),
+              <strong>Active Bookings</strong>, and <strong>Available Menu Items</strong>.
+              These update automatically whenever you add, edit, or delete data.
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><i class="fa-solid fa-chart-line"></i> <span data-i18n="dh_charts">Charts</span></div>
+            <div class="card-body" data-i18n="dh_charts_body">
+              The <strong>Revenue Trend</strong> line chart shows the last six months of combined
+              income from bookings and orders. The <strong>Room Categories</strong> doughnut
+              chart shows how your inventory splits across Standard, Deluxe, Executive Suite,
+              and Family Suite room types.
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><i class="fa-solid fa-bullhorn"></i> <span data-i18n="dh_banner">Promotional banner</span></div>
+            <div class="card-body" data-i18n="dh_banner_body">
+              The coloured banner at the top of the dashboard rotates through your active
+              promotional slides. Manage them under <strong>Ad Banners</strong> in the sidebar.
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================
+             ROOMS
+             ============================ -->
+        <section class="section" id="rooms-help">
+          <div class="section-header">
+            <div class="section-icon emerald"><i class="fa-solid fa-bed"></i></div>
+            <div>
+              <h2 class="section-title" data-i18n="rh_title">Managing Rooms</h2>
+              <p class="section-sub" data-i18n="rh_sub">Add, edit, and track room inventory</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><i class="fa-solid fa-plus"></i> <span data-i18n="rh_add">Adding a new room</span></div>
+            <ol class="steps">
+              <li data-i18n="rh_add_1">Click <strong>Rooms</strong> in the sidebar.</li>
+              <li data-i18n="rh_add_2">Click the <strong>Add Room</strong> button (top right).</li>
+              <li data-i18n="rh_add_3">Fill in: Room Number, Capacity, Room Type, Price per Night, Status, and an optional Description.</li>
+              <li data-i18n="rh_add_4">Press <strong>Save Room</strong>. The room appears in the table immediately.</li>
+            </ol>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><i class="fa-solid fa-pen"></i> <span data-i18n="rh_edit">Editing a room</span></div>
+            <div class="card-body" data-i18n="rh_edit_body">
+              Click the blue <i class="fa-solid fa-pen"></i> button on any room row.
+              The form opens with all current values pre-filled. Modify anything and press
+              <strong>Save Room</strong>.
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><i class="fa-solid fa-trash"></i> <span data-i18n="rh_delete">Deleting a room</span></div>
+            <div class="card-body" data-i18n="rh_delete_body">
+              Click the red <i class="fa-solid fa-trash"></i> button. A confirmation dialog appears —
+              because deleting a room also removes any bookings linked to it.
+              Only <strong>Admin</strong> can delete.
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><i class="fa-solid fa-circle-half-stroke"></i> <span data-i18n="rh_status">Room statuses</span></div>
+            <div class="card-body" data-i18n="rh_status_body">
+              Every room has one of four statuses, each with its own colour:
+            </div>
+            <ul style="margin-top:0.6rem; padding-left:1.25rem; font-size:0.82rem; color:var(--text-mid); line-height:1.9;">
+              <li><strong style="color:#6ee7b7;">Available</strong> — <span data-i18n="rh_status_available">ready for a new guest</span></li>
+              <li><strong style="color:#fda4af;">Occupied</strong> — <span data-i18n="rh_status_occupied">currently has a checked-in guest</span></li>
+              <li><strong style="color:#fcd34d;">Cleaning</strong> — <span data-i18n="rh_status_cleaning">being serviced after checkout</span></li>
+              <li><strong style="color:#d8b4fe;">Maintenance</strong> — <span data-i18n="rh_status_maintenance">temporarily out of service</span></li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- ============================
+             BOOKINGS
+             ============================ -->
+        <section class="section" id="bookings-help">
+          <div class="section-header">
+            <div class="section-icon sky"><i class="fa-solid fa-calendar-check"></i></div>
+            <div>
+              <h2 class="section-title" data-i18n="bh_title">Bookings &amp; Reservations</h2>
+              <p class="section-sub" data-i18n="bh_sub">The heart of daily operations</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><i class="fa-solid fa-calendar-plus"></i> <span data-i18n="bh_create">Creating a booking</span></div>
+            <ol class="steps">
+              <li data-i18n="bh_create_1">Open the <strong>Bookings</strong> module.</li>
+              <li data-i18n="bh_create_2">Click <strong>New Booking</strong>.</li>
+              <li data-i18n="bh_create_3">Choose a room from the dropdown. The price per night is shown.</li>
+              <li data-i18n="bh_create_4">Enter the guest's name and phone number.</li>
+              <li data-i18n="bh_create_5">Pick check-in and check-out dates. The total is <strong>auto-calculated</strong>.</li>
+              <li data-i18n="bh_create_6">Set status and press <strong>Save Booking</strong>.</li>
+            </ol>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><i class="fa-solid fa-grip"></i> <span data-i18n="bh_grid">Live room status grid</span></div>
+            <div class="card-body" data-i18n="bh_grid_body">
+              Above the bookings table is a coloured grid showing every room's current status.
+              Green = Available, red = Occupied, amber = Cleaning, purple = Maintenance.
+              Use it as a quick visual overview.
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><i class="fa-solid fa-arrows-rotate"></i> <span data-i18n="bh_autosync">Automatic room status updates</span></div>
+            <div class="card-body" data-i18n="bh_autosync_body">
+              When you set a booking's status to <strong>CheckedIn</strong>, the linked room
+              automatically becomes <strong>Occupied</strong>. When you set it to
+              <strong>CheckedOut</strong> or <strong>Cancelled</strong>, the room becomes
+              <strong>Cleaning</strong>. This keeps room inventory in sync without manual updates.
+            </div>
+          </div>
+
+          <div class="callout success">
+            <i class="fa-solid fa-lightbulb"></i>
+            <div>
+              <strong data-i18n="bh_tip">Time-saver:</strong>
+              <span data-i18n="bh_tip_body">Pick the check-in date first, then the check-out date. The total ETB is recalculated every time either date changes.</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================
+             RESTAURANT
+             ============================ -->
+        <section class="section" id="restaurant-help">
+          <div class="section-header">
+            <div class="section-icon rose"><i class="fa-solid fa-utensils"></i></div>
+            <div>
+              <h2 class="section-title" data-i18n="rest_title">Restaurant &amp; Orders</h2>
+              <p class="section-sub" data-i18n="rest_sub">Menu management and kitchen workflow</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><i class="fa-solid fa-book"></i> <span data-i18n="rest_menu">The menu catalog</span></div>
+            <div class="card-body" data-i18n="rest_menu_body">
+              Every dish appears as a card showing its category, availability status, name,
+              description, and price. Available dishes have a green badge; hidden dishes
+              have a red badge and don't appear in the order cart.
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><i class="fa-solid fa-plus"></i> <span data-i18n="rest_add">Adding a dish</span></div>
+            <ol class="steps">
+              <li data-i18n="rest_add_1">In the <strong>Restaurant</strong> module, click <strong>Add Dish</strong>.</li>
+              <li data-i18n="rest_add_2">Enter the name, category, and price in ETB.</li>
+              <li data-i18n="rest_add_3">Tick <strong>Available on menu</strong> if it should be visible to guests.</li>
+              <li data-i18n="rest_add_4">Add a short description and press <strong>Save Menu Item</strong>.</li>
+            </ol>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><i class="fa-solid fa-cart-shopping"></i> <span data-i18n="rest_order">Placing an order</span></div>
+            <ol class="steps">
+              <li data-i18n="rest_order_1">Click the pink <i class="fa-solid fa-plus"></i> on any dish card. It's added to the cart.</li>
+              <li data-i18n="rest_order_2">The cart badge in the header shows the current item count.</li>
+              <li data-i18n="rest_order_3">Click the <strong>Cart</strong> button (top right).</li>
+              <li data-i18n="rest_order_4">Choose <strong>Room Service</strong> or <strong>Restaurant Table</strong>.</li>
+              <li data-i18n="rest_order_5">Pick the target room or table from the dropdown.</li>
+              <li data-i18n="rest_order_6">Review the cart, then press <strong>Submit Order</strong>.</li>
+            </ol>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><i class="fa-solid fa-receipt"></i> <span data-i18n="rest_kitchen">Kitchen orders queue</span></div>
+            <div class="card-body" data-i18n="rest_kitchen_body">
+              Below the menu is the live orders queue. Every submitted order appears here
+              with its type, target, items summary, total, and status.
+              Statuses progress: <strong>Pending</strong> → <strong>Preparing</strong> → <strong>Served</strong>.
+              Use the <i class="fa-solid fa-pen"></i> button to advance an order's status, or
+              the <i class="fa-solid fa-trash"></i> button to delete it.
+            </div>
+          </div>
+
+          <div class="callout info">
+            <i class="fa-solid fa-circle-info"></i>
+            <div>
+              <strong data-i18n="rest_dup">Duplicate items:</strong>
+              <span data-i18n="rest_dup_body">Adding the same dish twice increments its quantity in the cart instead of creating a duplicate line — much cleaner when ordering large tables.</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================
+             TABLES
+             ============================ -->
+        <section class="section" id="tables-help">
+          <div class="section-header">
+            <div class="section-icon teal"><i class="fa-solid fa-chair"></i></div>
+            <div>
+              <h2 class="section-title" data-i18n="th_title">Restaurant Tables</h2>
+              <p class="section-sub" data-i18n="th_sub">Seating inventory for the dining room</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><i class="fa-solid fa-map-location-dot"></i> <span data-i18n="th_zones">Three zones</span></div>
+            <div class="card-body" data-i18n="th_zones_body">
+              Every table belongs to one of three zones: <strong>Indoor Main</strong>,
+              <strong>Garden Patio</strong>, or <strong>Rooftop Lounge</strong>.
+              Each has its own capacity and status (<strong>Available</strong>, <strong>Reserved</strong>, <strong>Occupied</strong>).
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><i class="fa-solid fa-plus"></i> <span data-i18n="th_add">Adding a table</span></div>
+            <ol class="steps">
+              <li data-i18n="th_add_1">Open the <strong>Restaurant Tables</strong> module.</li>
+              <li data-i18n="th_add_2">Click <strong>Add Table</strong>.</li>
+              <li data-i18n="th_add_3">Enter the table number (e.g. <code>T-01</code>), capacity, zone, and initial status.</li>
+              <li data-i18n="th_add_4">Press <strong>Save Table</strong>.</li>
+            </ol>
+          </div>
+
+          <div class="callout success">
+            <i class="fa-solid fa-link"></i>
+            <div>
+              <strong data-i18n="th_integration">Integration:</strong>
+              <span data-i18n="th_integration_body">Every table you add here becomes a selectable target in the order cart dropdown. Add all your tables first, then place orders against them directly.</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================
+             USERS
+             ============================ -->
+        <section class="section" id="users-help">
+          <div class="section-header">
+            <div class="section-icon sky"><i class="fa-solid fa-users"></i></div>
+            <div>
+              <h2 class="section-title" data-i18n="uh_title">Users &amp; Staff</h2>
+              <p class="section-sub" data-i18n="uh_sub">Manage who can access the system</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><i class="fa-solid fa-user-plus"></i> <span data-i18n="uh_add">Registering a new user</span></div>
+            <ol class="steps">
+              <li data-i18n="uh_add_1">Open the <strong>Users &amp; Staff</strong> module.</li>
+              <li data-i18n="uh_add_2">Click <strong>Add User</strong>.</li>
+              <li data-i18n="uh_add_3">Fill in Full Name, Email (must be unique), Phone, and Role.</li>
+              <li data-i18n="uh_add_4">Press <strong>Save User</strong>.</li>
+            </ol>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><i class="fa-solid fa-id-badge"></i> <span data-i18n="uh_roles">The three roles</span></div>
+            <div class="card-body" data-i18n="uh_roles_body">
+              Choose <strong>admin</strong> for owners/managers, <strong>receptionist</strong> for
+              front-desk staff, and <strong>guest</strong> for visitor accounts. See the
+              <a href="#roles" style="color:var(--amber);">Roles &amp; Permissions</a> section above
+              for the exact capabilities of each.
+            </div>
+          </div>
+
+          <div class="callout warn">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <div>
+              <strong data-i18n="uh_unique">Unique emails:</strong>
+              <span data-i18n="uh_unique_body">Every user must have a distinct email address. If you try to save a duplicate, D1 rejects the insert and you'll see a red error toast.</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================
+             REPORTS
+             ============================ -->
+        <section class="section" id="reports-help">
+          <div class="section-header">
+            <div class="section-icon emerald"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+            <div>
+              <h2 class="section-title" data-i18n="rep_title">Financial Reports</h2>
+              <p class="section-sub" data-i18n="rep_sub">Live revenue ledger &amp; CSV export</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><i class="fa-solid fa-chart-simple"></i> <span data-i18n="rep_kpi">Revenue breakdown</span></div>
+            <div class="card-body" data-i18n="rep_kpi_body">
+              Three summary cards at the top show <strong>Room Revenue</strong>,
+              <strong>Restaurant Revenue</strong>, and the <strong>Grand Total</strong>.
+              These are computed live from the bookings and orders tables — there is no
+              separate ledger to maintain.
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><i class="fa-solid fa-table"></i> <span data-i18n="rep_ledger">Transaction ledger</span></div>
+            <div class="card-body" data-i18n="rep_ledger_body">
+              Below the summary, every transaction appears as a row with its reference number
+              (<code>B&lt;id&gt;</code> for bookings, <code>O&lt;id&gt;</code> for orders), date,
+              type, description, payer, and amount. Rows are sorted by date, most recent first.
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><i class="fa-solid fa-file-csv"></i> <span data-i18n="rep_csv">CSV export</span></div>
+            <div class="card-body" data-i18n="rep_csv_body">
+              Click <strong>Export CSV</strong> to download the entire ledger as a spreadsheet-ready
+              file. Open it in Excel, Google Sheets, or Numbers for further analysis.
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><i class="fa-solid fa-print"></i> <span data-i18n="rep_receipt">Printing receipts</span></div>
+            <div class="card-body" data-i18n="rep_receipt_body">
+              Click the <i class="fa-solid fa-print"></i> button on any row to open a branded
+              receipt in a printable format. Press <kbd>Ctrl</kbd>+<kbd>P</kbd> (or <kbd>Cmd</kbd>+<kbd>P</kbd>
+              on Mac) or click the <strong>Print</strong> button.
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================
+             BANNERS
+             ============================ -->
+        <section class="section" id="banners-help">
+          <div class="section-header">
+            <div class="section-icon purple"><i class="fa-solid fa-bullhorn"></i></div>
+            <div>
+              <h2 class="section-title" data-i18n="ban_title">Ad Banners</h2>
+              <p class="section-sub" data-i18n="ban_sub">Promotional slides for the dashboard</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><i class="fa-solid fa-plus"></i> <span data-i18n="ban_add">Creating a banner</span></div>
+            <ol class="steps">
+              <li data-i18n="ban_add_1">Open the <strong>Ad Banners</strong> module.</li>
+              <li data-i18n="ban_add_2">Click <strong>Create Banner</strong>.</li>
+              <li data-i18n="ban_add_3">Enter a short title (e.g. "Jimma Coffee Tour"), a description, and an offer tag.</li>
+              <li data-i18n="ban_add_4">Choose a badge colour for the tag.</li>
+              <li data-i18n="ban_add_5">Tick <strong>Active</strong> to make it visible on the dashboard.</li>
+              <li data-i18n="ban_add_6">Press <strong>Save Banner</strong>.</li>
+            </ol>
+          </div>
+
+          <div class="callout info">
+            <i class="fa-solid fa-lightbulb"></i>
+            <div>
+              <strong data-i18n="ban_rotate">Rotation:</strong>
+              <span data-i18n="ban_rotate_body">Only active banners appear on the dashboard. Currently the most recent active banner is featured in the hero area; you can hide a banner at any time by unticking the Active checkbox.</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================
+             SQL CONSOLE
+             ============================ -->
+        <section class="section" id="sql-help">
+          <div class="section-header">
+            <div class="section-icon teal"><i class="fa-solid fa-database"></i></div>
+            <div>
+              <h2 class="section-title" data-i18n="sql_title_help">Cloudflare D1 SQL Console</h2>
+              <p class="section-sub" data-i18n="sql_sub_help">Advanced database access — Admin only</p>
+            </div>
+          </div>
+
+          <div class="callout danger">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <div>
+              <strong data-i18n="sql_danger">Admin only.</strong>
+              <span data-i18n="sql_danger_body">This module runs raw SQL against your production database. There is no undo. Only use it if you understand SQL.</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><i class="fa-solid fa-play"></i> <span data-i18n="sql_run">Running a query</span></div>
+            <ol class="steps">
+              <li data-i18n="sql_run_1">Open the <strong>D1 SQL Console</strong>.</li>
+              <li data-i18n="sql_run_2">Type your SQL into the editor (e.g. <code>SELECT * FROM rooms;</code>).</li>
+              <li data-i18n="sql_run_3">Click <strong>Run Query</strong>. Results appear as formatted JSON below.</li>
+            </ol>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><i class="fa-solid fa-code"></i> <span data-i18n="sql_examples">Useful query examples</span></div>
+            <div class="card-body">
+              <div style="background:var(--code-bg); border:1px solid var(--border); border-radius:8px; padding:0.9rem; font-family:'JetBrains Mono',monospace; font-size:0.75rem; line-height:1.8; color:var(--text-mid); margin-top:0.5rem;">
+                <div style="color:var(--amber);">-- List all occupied rooms</div>
+                <div>SELECT room_number, room_type FROM rooms WHERE status = 'Occupied';</div>
+                <br>
+                <div style="color:var(--amber);">-- Count bookings per room</div>
+                <div>SELECT room_id, COUNT(*) as total FROM bookings GROUP BY room_id;</div>
+                <br>
+                <div style="color:var(--amber);">-- Today's orders</div>
+                <div>SELECT * FROM orders WHERE DATE(created_at) = DATE('now');</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><i class="fa-solid fa-rotate-left"></i> <span data-i18n="sql_reset">Resetting the schema</span></div>
+            <div class="card-body" data-i18n="sql_reset_body">
+              The <strong>Reset Schema</strong> button wipes all tables and re-creates them with the
+              original column definitions. <strong>All data is lost.</strong> Use this only when you want
+              to start fresh — for example, after a demo or test session.
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================
+             THEMES
+             ============================ -->
+        <section class="section" id="themes">
+          <div class="section-header">
+            <div class="section-icon amber"><i class="fa-solid fa-circle-half-stroke"></i></div>
+            <div>
+              <h2 class="section-title" data-i18n="theme_title">Themes: Dark &amp; Light</h2>
+              <p class="section-sub" data-i18n="theme_sub">Comfort for day and night shifts</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><i class="fa-solid fa-moon"></i> <span data-i18n="theme_how">How to toggle</span></div>
+            <div class="card-body" data-i18n="theme_how_body">
+              Click the <i class="fa-solid fa-moon"></i> / <i class="fa-solid fa-sun"></i> icon in the
+              header. The entire app — panels, tables, modals, forms, charts, and toasts — flips
+              instantly between dark and light.
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><i class="fa-solid fa-save"></i> <span data-i18n="theme_persist">Remembered across visits</span></div>
+            <div class="card-body" data-i18n="theme_persist_body">
+              Your theme preference is saved in your browser. When you return to the app,
+              the same theme loads automatically before the first paint — no flash.
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><i class="fa-solid fa-clock"></i> <span data-i18n="theme_when">When to use each</span></div>
+            <div class="card-body" data-i18n="theme_when_body">
+              <strong>Dark theme</strong> is the default and best for evening or night shifts —
+              it reduces eye strain in dim lighting. <strong>Light theme</strong> works best during
+              daytime and for printing or screenshots.
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================
+             LANGUAGES
+             ============================ -->
+        <section class="section" id="languages">
+          <div class="section-header">
+            <div class="section-icon sky"><i class="fa-solid fa-language"></i></div>
+            <div>
+              <h2 class="section-title" data-i18n="lang_title">Languages: English &amp; አማርኛ</h2>
+              <p class="section-sub" data-i18n="lang_sub">Switch the entire interface instantly</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><i class="fa-solid fa-globe"></i> <span data-i18n="lang_how">How to switch</span></div>
+            <div class="card-body" data-i18n="lang_how_body">
+              Click the <i class="fa-solid fa-language"></i> button in the header. It cycles between
+              <strong>EN</strong> (English) and <strong>አማ</strong> (Amharic). Every label, table header,
+              form field, toast, and modal is translated.
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><i class="fa-solid fa-check-circle"></i> <span data-i18n="lang_what">What gets translated</span></div>
+            <ul class="role-list" style="margin-top:0.4rem;">
+              <li class="yes" data-i18n="lang_what_1">All navigation and page titles</li>
+              <li class="yes" data-i18n="lang_what_2">Buttons, table headers, form labels</li>
+              <li class="yes" data-i18n="lang_what_3">Room types, statuses, categories, zones</li>
+              <li class="yes" data-i18n="lang_what_4">Toast notifications and error messages</li>
+              <li class="yes" data-i18n="lang_what_5">Receipts and printed documents</li>
+              <li class="yes" data-i18n="lang_what_6">Chart legends and month names</li>
+            </ul>
+          </div>
+
+          <div class="callout info">
+            <i class="fa-solid fa-database"></i>
+            <div>
+              <strong data-i18n="lang_db">Database stays English:</strong>
+              <span data-i18n="lang_db_body">The values stored in the database (room statuses, categories, etc.) remain in English. Translation happens only at display time, so your data stays consistent regardless of the interface language.</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================
+             SHORTCUTS
+             ============================ -->
+        <section class="section" id="shortcuts">
+          <div class="section-header">
+            <div class="section-icon indigo"><i class="fa-solid fa-keyboard"></i></div>
+            <div>
+              <h2 class="section-title" data-i18n="sc_title">Keyboard Shortcuts</h2>
+              <p class="section-sub" data-i18n="sc_sub">Work faster without the mouse</p>
+            </div>
+          </div>
+
+          <div class="card" style="padding:0; overflow:hidden;">
+            <table class="shortcut-table">
+              <thead>
+                <tr>
+                  <th data-i18n="sc_col_action">Action</th>
+                  <th data-i18n="sc_col_keys">Shortcut</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td data-i18n="sc_open_search">Focus search field</td><td><kbd>/</kbd></td></tr>
+                <tr><td data-i18n="sc_close_modal">Close any open modal</td><td><kbd>Esc</kbd></td></tr>
+                <tr><td data-i18n="sc_close_modal_2">Click outside a modal</td><td><kbd>Click backdrop</kbd></td></tr>
+                <tr><td data-i18n="sc_submit_form">Submit the current form</td><td><kbd>Enter</kbd></td></tr>
+                <tr><td data-i18n="sc_print">Print the current page or receipt</td><td><kbd>Ctrl</kbd>+<kbd>P</kbd></td></tr>
+                <tr><td data-i18n="sc_tab">Move between form fields</td><td><kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ============================
+             FAQ
+             ============================ -->
+        <section class="section" id="faq">
+          <div class="section-header">
+            <div class="section-icon amber"><i class="fa-solid fa-circle-question"></i></div>
+            <div>
+              <h2 class="section-title" data-i18n="faq_title">Frequently Asked Questions</h2>
+              <p class="section-sub" data-i18n="faq_sub">Answers to the most common questions</p>
+            </div>
+          </div>
+
+          <details class="faq-item">
+            <summary class="faq-q" data-i18n="faq_q1">Is my data saved automatically?</summary>
+            <div class="faq-a" data-i18n="faq_a1">
+              Yes. Every time you save a form (room, booking, dish, etc.), the change is sent
+              immediately to the Cloudflare D1 database. There is no separate "Save" step or draft state.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-q" data-i18n="faq_q2">Can I use the app offline?</summary>
+            <div class="faq-a" data-i18n="faq_a2">
+              Partially. If the network is down, the header badge changes to <strong>"D1 Offline — Local Cache"</strong>
+              and the app loads your last cached data. You can still view everything. However, changes
+              you make while offline won't sync back to the server — they stay only in your browser.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-q" data-i18n="faq_q3">Why can't I see the SQL Console?</summary>
+            <div class="faq-a" data-i18n="faq_a3">
+              The SQL Console is restricted to the <strong>Admin</strong> role. If you're viewing as
+              Receptionist or Guest, the menu item is hidden. Switch roles via the dropdown in the header
+              to access it.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-q" data-i18n="faq_q4">Can I undo a delete?</summary>
+            <div class="faq-a" data-i18n="faq_a4">
+              No. Deletions are permanent. The confirmation dialog exists to prevent accidents,
+              but once you confirm, the record is gone from the D1 database. If you've made a
+              mistake, you'll need to re-enter the data manually.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-q" data-i18n="faq_q5">How do I know if a save worked?</summary>
+            <div class="faq-a" data-i18n="faq_a5">
+              A green toast appears in the bottom-right corner with a checkmark icon and a message
+              like <strong>"Added Room 105"</strong>. If something fails, you'll see a red toast
+              with the error message instead.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-q" data-i18n="faq_q6">Can I add a third language?</summary>
+            <div class="faq-a" data-i18n="faq_a6">
+              Yes — this is a developer task. The app's translation dictionary lives in
+              <code>app.js</code> under <code>T.en</code> and <code>T.am</code>. To add a new language
+              (e.g. Afaan Oromoo), add a <code>T.om</code> key with all the same translation keys.
+              The language button would then cycle EN → አማ → OM.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-q" data-i18n="faq_q7">What happens if the internet drops mid-save?</summary>
+            <div class="faq-a" data-i18n="faq_a7">
+              The save will fail and you'll see a red error toast. The form stays open so you can
+              retry once the connection is restored. Nothing is half-saved — D1 transactions are atomic.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-q" data-i18n="faq_q8">Who can see the financial reports?</summary>
+            <div class="faq-a" data-i18n="faq_a8">
+              Only Admins. The Financial Reports module is completely hidden from Receptionists
+              and Guests. In a production system this would also be enforced at the API level.
+            </div>
+          </details>
+        </section>
+
+        <!-- ============================
+             TROUBLESHOOTING
+             ============================ -->
+        <section class="section" id="troubleshooting">
+          <div class="section-header">
+            <div class="section-icon rose"><i class="fa-solid fa-wrench"></i></div>
+            <div>
+              <h2 class="section-title" data-i18n="ts_title">Common Issues</h2>
+              <p class="section-sub" data-i18n="ts_sub">Quick fixes for frequent problems</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><i class="fa-solid fa-wifi"></i> <span data-i18n="ts_offline">Header says "D1 Offline"</span></div>
+            <div class="card-body" data-i18n="ts_offline_body">
+              <strong>Cause:</strong> The Cloudflare Worker API is unreachable.<br>
+              <strong>Fix:</strong> Check your internet connection. Try clicking the refresh button
+              in the header. If it persists, the API might be temporarily down — wait a few minutes
+              and try again. You can keep using the app; changes just won't sync.
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><i class="fa-solid fa-circle-exclamation"></i> <span data-i18n="ts_error">Red error toast after saving</span></div>
+            <div class="card-body" data-i18n="ts_error_body">
+              <strong>Cause:</strong> The database rejected the save — usually a duplicate value
+              (room number, email) or a missing required field.<br>
+              <strong>Fix:</strong> Read the error message in the toast. Common issues:
+              <ul style="margin:0.5rem 0 0 1.25rem; line-height:1.9;">
+                <li>Room numbers must be unique across all rooms</li>
+                <li>Email addresses must be unique across all users</li>
+                <li>Guest names, phone numbers, and dates are required for bookings</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><i class="fa-solid fa-mobile-screen"></i> <span data-i18n="ts_mobile">Sidebar won't open on mobile</span></div>
+            <div class="card-body" data-i18n="ts_mobile_body">
+              <strong>Fix:</strong> Tap the <i class="fa-solid fa-bars"></i> icon in the top-left corner
+              of the header. If it still won't open, refresh the page. On very small screens, the
+              sidebar slides in from the left as an overlay — tap outside it to close.
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><i class="fa-solid fa-chart-line"></i> <span data-i18n="ts_charts">Charts are blank</span></div>
+            <div class="card-body" data-i18n="ts_charts_body">
+              <strong>Cause:</strong> Usually a browser issue — Chart.js failed to load from the CDN.<br>
+              <strong>Fix:</strong> Hard-refresh the page (<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>R</kbd>).
+              If it persists, check that your network isn't blocking <code>cdn.jsdelivr.net</code>.
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><i class="fa-solid fa-lock"></i> <span data-i18n="ts_403">"D1 must be online" message</span></div>
+            <div class="card-body" data-i18n="ts_403_body">
+              <strong>Cause:</strong> You tried to run a SQL query or reset the schema while the
+              app was in offline mode.<br>
+              <strong>Fix:</strong> Reconnect to the internet and refresh. Only online mode can
+              execute raw SQL or reset the schema.
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><i class="fa-solid fa-palette"></i> <span data-i18n="ts_theme">Theme won't stick</span></div>
+            <div class="card-body" data-i18n="ts_theme_body">
+              <strong>Cause:</strong> Your browser may be blocking <code>localStorage</code> (private
+              browsing mode or strict cookie settings).<br>
+              <strong>Fix:</strong> Allow site data for the app's domain in your browser settings,
+              or exit private browsing.
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================
+             CONTACT
+             ============================ -->
+        <section class="section" id="contact">
+          <div class="section-header">
+            <div class="section-icon amber"><i class="fa-solid fa-headset"></i></div>
+            <div>
+              <h2 class="section-title" data-i18n="contact_title">Contact Support</h2>
+              <p class="section-sub" data-i18n="contact_sub">Still stuck? Reach out</p>
+            </div>
+          </div>
+
+          <div class="contact-grid">
+            <a href="tel:+251471112233" class="contact-card">
+              <div class="contact-icon amber"><i class="fa-solid fa-phone"></i></div>
+              <div class="contact-info">
+                <div class="contact-label" data-i18n="contact_phone_label">Front Desk Phone</div>
+                <div class="contact-value">+251 47 111 2233</div>
+                <div class="contact-desc" data-i18n="contact_phone_desc">Available 24 / 7</div>
+              </div>
+            </a>
+
+            <a href="mailto:support@asniguesthouse.com" class="contact-card">
+              <div class="contact-icon sky"><i class="fa-solid fa-envelope"></i></div>
+              <div class="contact-info">
+                <div class="contact-label" data-i18n="contact_email_label">Support Email</div>
+                <div class="contact-value">support@asniguesthouse.com</div>
+                <div class="contact-desc" data-i18n="contact_email_desc">Response within 24 hours</div>
+              </div>
+            </a>
+
+            <div class="contact-card" style="cursor:default;">
+              <div class="contact-icon emerald"><i class="fa-solid fa-location-dot"></i></div>
+              <div class="contact-info">
+                <div class="contact-label" data-i18n="contact_address_label">Address</div>
+                <div class="contact-value">Ferenj Arada, Jimma, Ethiopia</div>
+                <div class="contact-desc" data-i18n="contact_address_desc">Walk-ins welcome</div>
+              </div>
+            </div>
+
+            <div class="contact-card" style="cursor:default;">
+              <div class="contact-icon rose"><i class="fa-solid fa-clock"></i></div>
+              <div class="contact-info">
+                <div class="contact-label" data-i18n="contact_hours_label">Reception Hours</div>
+                <div class="contact-value" data-i18n="contact_hours_value">24 hours · 7 days</div>
+                <div class="contact-desc" data-i18n="contact_hours_desc">Always open</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="callout success" style="margin-top:1rem;">
+            <i class="fa-solid fa-circle-check"></i>
+            <div>
+              <strong data-i18n="contact_thanks">Thank you for using Asni Guest House.</strong>
+              <span data-i18n="contact_thanks_body">We hope this guide helps you get the most out of the system. For technical issues specific to the software, contact the developer directly.</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- No results message -->
+        <div class="no-results" id="noResults" style="display:none;">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <h3 data-i18n="no_results_title">No matching results</h3>
+          <p data-i18n="no_results_body">Try a different search term, or browse the sidebar categories.</p>
+        </div>
+
+        <!-- Footer -->
+        <footer class="help-footer">
+          <div>
+            <strong>Asni Guest House</strong> &middot;
+            <span data-i18n="footer_version">Help Center v3.0</span> &middot;
+            <a href="index.html" data-i18n="footer_back">Return to app</a>
+          </div>
+        </footer>
+
+      </div>
+    </main>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   Help Page — theme, language, search, and scroll spy
+   ============================================================ */
+(function () {
+  'use strict';
+
+  const KEYS = { theme: 'asni_theme_v1', lang: 'asni_lang_v1' };
+  let currentTheme = localStorage.getItem(KEYS.theme) || 'dark';
+  let currentLang  = localStorage.getItem(KEYS.lang)  || 'en';
+
+  /* ============================================================
+     TRANSLATIONS (subset — mirrors main app's dictionary keys)
+     ============================================================ */
+  const T = {
+    en: {
+      help_title: 'Help & Support',
+      help_sub: 'Everything you need to use Asni Guest House',
+      back_to_app: 'Back to App',
+      search_placeholder: 'Search help…',
+      version: 'Version',
+      footer_version: 'Help Center v3.0',
+      footer_back: 'Return to app',
+
+      hero_kicker: 'User Guide',
+      hero_title: 'Welcome to Asni Guest House',
+      hero_sub: 'A complete guide to using the Asni Guest House management system. Learn how to manage rooms, bookings, restaurant orders, staff accounts, and financial reports — for admins, receptionists, and guests.',
+      btn_get_started: 'Get Started',
+      btn_view_faq: 'View FAQ',
+
+      toc_getting_started: 'Getting Started',
+      toc_features: 'Features',
+      toc_settings: 'Settings',
+      toc_trouble: 'Troubleshooting',
+
+      toc_intro: 'Introduction',
+      toc_start: 'Getting Started',
+      toc_roles: 'Roles & Permissions',
+      toc_dashboard: 'Dashboard',
+      toc_rooms: 'Managing Rooms',
+      toc_bookings: 'Bookings',
+      toc_restaurant: 'Restaurant & Orders',
+      toc_tables: 'Restaurant Tables',
+      toc_users: 'Users & Staff',
+      toc_reports: 'Financial Reports',
+      toc_banners: 'Ad Banners',
+      toc_sql: 'SQL Console',
+      toc_theme: 'Themes',
+      toc_lang: 'Languages',
+      toc_shortcuts: 'Keyboard Shortcuts',
+      toc_faq: 'FAQ',
+      toc_troubleshoot: 'Common Issues',
+      toc_contact: 'Contact Support',
+
+      qs_modules: 'Modules',
+      qs_roles: 'User Roles',
+      qs_shortcuts: 'Shortcuts',
+      qs_support: 'Support',
+
+      gs_title: 'Getting Started', gs_sub: 'Your first 5 minutes with the app',
+      gs_step1_title: 'Open the app', gs_step1_body: 'Visit asni-guest-house.vercel.app in any modern browser (Chrome, Edge, Firefox, or Safari). The app loads instantly — no installation required.',
+      gs_step2_title: 'Choose your role', gs_step2_body: 'Use the role dropdown in the top-right of the header to switch between Admin, Receptionist, and Guest views. The colour of the top bar and the visible menu items change instantly.',
+      gs_step3_title: 'Explore the sidebar', gs_step3_body: 'The left sidebar is your main navigation. Click any item to jump to that module. On mobile, tap the menu icon to reveal it.',
+      gs_step4_title: 'Try adding a record', gs_step4_body: 'Start with Rooms → click Add Room. Fill in the form and press Save Room. A green toast confirms the save and the new room appears in the table instantly.',
+      gs_tip: 'Tip:', gs_tip_body: 'The app works offline. If the network is down, you\'ll see "D1 Offline — Local Cache" in the header and everything still works with cached data.',
+
+      roles_title: 'Roles & Permissions', roles_sub: 'What each user type can see and do',
+      role_admin_full: 'Admin', role_recept_full: 'Receptionist', role_guest_full: 'Guest',
+      rp_admin_dash: 'Full dashboard access', rp_admin_rooms: 'Manage rooms, pricing, availability',
+      rp_admin_users: 'Create & edit staff accounts', rp_admin_bookings: 'Full booking control',
+      rp_admin_finance: 'Financial reports & CSV export', rp_admin_sql: 'SQL console & schema reset',
+      rp_recept_dash: 'Dashboard (no revenue details)', rp_recept_rooms: 'View & update room status',
+      rp_recept_users: 'View users (no delete)', rp_recept_bookings: 'Create & manage bookings',
+      rp_recept_orders: 'Restaurant & kitchen orders', rp_recept_finance: 'No financial reports',
+      rp_recept_sql: 'No SQL console access',
+      rp_guest_dash: 'Dashboard overview', rp_guest_rooms: 'View room availability',
+      rp_guest_bookings: 'View own bookings', rp_guest_menu: 'Browse menu & place orders',
+      rp_guest_users: 'No user management', rp_guest_finance: 'No financial data',
+      roles_switch: 'Switching roles:', roles_switch_body: 'Use the dropdown in the header. Your choice is remembered across sessions. If you switch to Guest while viewing a restricted page, you\'ll be automatically redirected to the Dashboard.',
+
+      dash_help_title: 'Dashboard Overview', dash_help_sub: 'Your at-a-glance command centre',
+      dh_kpi: 'The four KPI cards', dh_kpi_body: 'The top row shows real-time metrics: Total Revenue (rooms + dining), Occupancy Rate (percentage of rooms currently occupied), Active Bookings, and Available Menu Items. These update automatically whenever you add, edit, or delete data.',
+      dh_charts: 'Charts', dh_charts_body: 'The Revenue Trend line chart shows the last six months of combined income from bookings and orders. The Room Categories doughnut chart shows how your inventory splits across Standard, Deluxe, Executive Suite, and Family Suite room types.',
+      dh_banner: 'Promotional banner', dh_banner_body: 'The coloured banner at the top of the dashboard rotates through your active promotional slides. Manage them under Ad Banners in the sidebar.',
+
+      rh_title: 'Managing Rooms', rh_sub: 'Add, edit, and track room inventory',
+      rh_add: 'Adding a new room',
+      rh_add_1: 'Click Rooms in the sidebar.', rh_add_2: 'Click the Add Room button (top right).',
+      rh_add_3: 'Fill in: Room Number, Capacity, Room Type, Price per Night, Status, and an optional Description.',
+      rh_add_4: 'Press Save Room. The room appears in the table immediately.',
+      rh_edit: 'Editing a room', rh_edit_body: 'Click the blue edit button on any room row. The form opens with all current values pre-filled. Modify anything and press Save Room.',
+      rh_delete: 'Deleting a room', rh_delete_body: 'Click the red trash button. A confirmation dialog appears — because deleting a room also removes any bookings linked to it. Only Admin can delete.',
+      rh_status: 'Room statuses', rh_status_body: 'Every room has one of four statuses, each with its own colour:',
+      rh_status_available: 'ready for a new guest', rh_status_occupied: 'currently has a checked-in guest',
+      rh_status_cleaning: 'being serviced after checkout', rh_status_maintenance: 'temporarily out of service',
+
+      bh_title: 'Bookings & Reservations', bh_sub: 'The heart of daily operations',
+      bh_create: 'Creating a booking',
+      bh_create_1: 'Open the Bookings module.', bh_create_2: 'Click New Booking.',
+      bh_create_3: 'Choose a room from the dropdown. The price per night is shown.',
+      bh_create_4: 'Enter the guest\'s name and phone number.',
+      bh_create_5: 'Pick check-in and check-out dates. The total is auto-calculated.',
+      bh_create_6: 'Set status and press Save Booking.',
+      bh_grid: 'Live room status grid', bh_grid_body: 'Above the bookings table is a coloured grid showing every room\'s current status. Green = Available, red = Occupied, amber = Cleaning, purple = Maintenance. Use it as a quick visual overview.',
+      bh_autosync: 'Automatic room status updates', bh_autosync_body: 'When you set a booking\'s status to CheckedIn, the linked room automatically becomes Occupied. When you set it to CheckedOut or Cancelled, the room becomes Cleaning. This keeps room inventory in sync without manual updates.',
+      bh_tip: 'Time-saver:', bh_tip_body: 'Pick the check-in date first, then the check-out date. The total ETB is recalculated every time either date changes.',
+
+      rest_title: 'Restaurant & Orders', rest_sub: 'Menu management and kitchen workflow',
+      rest_menu: 'The menu catalog', rest_menu_body: 'Every dish appears as a card showing its category, availability status, name, description, and price. Available dishes have a green badge; hidden dishes have a red badge and don\'t appear in the order cart.',
+      rest_add: 'Adding a dish',
+      rest_add_1: 'In the Restaurant module, click Add Dish.', rest_add_2: 'Enter the name, category, and price in ETB.',
+      rest_add_3: 'Tick Available on menu if it should be visible to guests.', rest_add_4: 'Add a short description and press Save Menu Item.',
+      rest_order: 'Placing an order',
+      rest_order_1: 'Click the pink plus on any dish card. It\'s added to the cart.',
+      rest_order_2: 'The cart badge in the header shows the current item count.',
+      rest_order_3: 'Click the Cart button (top right).', rest_order_4: 'Choose Room Service or Restaurant Table.',
+      rest_order_5: 'Pick the target room or table from the dropdown.', rest_order_6: 'Review the cart, then press Submit Order.',
+      rest_kitchen: 'Kitchen orders queue', rest_kitchen_body: 'Below the menu is the live orders queue. Every submitted order appears here with its type, target, items summary, total, and status. Statuses progress: Pending → Preparing → Served. Use the edit button to advance an order\'s status, or the trash button to delete it.',
+      rest_dup: 'Duplicate items:', rest_dup_body: 'Adding the same dish twice increments its quantity in the cart instead of creating a duplicate line — much cleaner when ordering large tables.',
+
+      th_title: 'Restaurant Tables', th_sub: 'Seating inventory for the dining room',
+      th_zones: 'Three zones', th_zones_body: 'Every table belongs to one of three zones: Indoor Main, Garden Patio, or Rooftop Lounge. Each has its own capacity and status (Available, Reserved, Occupied).',
+      th_add: 'Adding a table',
+      th_add_1: 'Open the Restaurant Tables module.', th_add_2: 'Click Add Table.',
+      th_add_3: 'Enter the table number (e.g. T-01), capacity, zone, and initial status.',
+      th_add_4: 'Press Save Table.',
+      th_integration: 'Integration:', th_integration_body: 'Every table you add here becomes a selectable target in the order cart dropdown. Add all your tables first, then place orders against them directly.',
+
+      uh_title: 'Users & Staff', uh_sub: 'Manage who can access the system',
+      uh_add: 'Registering a new user',
+      uh_add_1: 'Open the Users & Staff module.', uh_add_2: 'Click Add User.',
+      uh_add_3: 'Fill in Full Name, Email (must be unique), Phone, and Role.', uh_add_4: 'Press Save User.',
+      uh_roles: 'The three roles', uh_roles_body: 'Choose admin for owners/managers, receptionist for front-desk staff, and guest for visitor accounts. See the Roles & Permissions section above for the exact capabilities of each.',
+      uh_unique: 'Unique emails:', uh_unique_body: 'Every user must have a distinct email address. If you try to save a duplicate, D1 rejects the insert and you\'ll see a red error toast.',
+
+      rep_title: 'Financial Reports', rep_sub: 'Live revenue ledger & CSV export',
+      rep_kpi: 'Revenue breakdown', rep_kpi_body: 'Three summary cards at the top show Room Revenue, Restaurant Revenue, and the Grand Total. These are computed live from the bookings and orders tables — there is no separate ledger to maintain.',
+      rep_ledger: 'Transaction ledger', rep_ledger_body: 'Below the summary, every transaction appears as a row with its reference number (B<id> for bookings, O<id> for orders), date, type, description, payer, and amount. Rows are sorted by date, most recent first.',
+      rep_csv: 'CSV export', rep_csv_body: 'Click Export CSV to download the entire ledger as a spreadsheet-ready file. Open it in Excel, Google Sheets, or Numbers for further analysis.',
+      rep_receipt: 'Printing receipts', rep_receipt_body: 'Click the print button on any row to open a branded receipt in a printable format. Press Ctrl+P (or Cmd+P on Mac) or click the Print button.',
+
+      ban_title: 'Ad Banners', ban_sub: 'Promotional slides for the dashboard',
+      ban_add: 'Creating a banner',
+      ban_add_1: 'Open the Ad Banners module.', ban_add_2: 'Click Create Banner.',
+      ban_add_3: 'Enter a short title, a description, and an offer tag.',
+      ban_add_4: 'Choose a badge colour for the tag.', ban_add_5: 'Tick Active to make it visible on the dashboard.',
+      ban_add_6: 'Press Save Banner.',
+      ban_rotate: 'Rotation:', ban_rotate_body: 'Only active banners appear on the dashboard. Currently the most recent active banner is featured in the hero area; you can hide a banner at any time by unticking the Active checkbox.',
+
+      sql_title_help: 'Cloudflare D1 SQL Console', sql_sub_help: 'Advanced database access — Admin only',
+      sql_danger: 'Admin only.', sql_danger_body: 'This module runs raw SQL against your production database. There is no undo. Only use it if you understand SQL.',
+      sql_run: 'Running a query',
+      sql_run_1: 'Open the D1 SQL Console.', sql_run_2: 'Type your SQL into the editor (e.g. SELECT * FROM rooms;).',
+      sql_run_3: 'Click Run Query. Results appear as formatted JSON below.',
+      sql_examples: 'Useful query examples',
+      sql_reset: 'Resetting the schema', sql_reset_body: 'The Reset Schema button wipes all tables and re-creates them with the original column definitions. All data is lost. Use this only when you want to start fresh — for example, after a demo or test session.',
+
+      theme_title: 'Themes: Dark & Light', theme_sub: 'Comfort for day and night shifts',
+      theme_how: 'How to toggle', theme_how_body: 'Click the moon / sun icon in the header. The entire app — panels, tables, modals, forms, charts, and toasts — flips instantly between dark and light.',
+      theme_persist: 'Remembered across visits', theme_persist_body: 'Your theme preference is saved in your browser. When you return to the app, the same theme loads automatically before the first paint — no flash.',
+      theme_when: 'When to use each', theme_when_body: 'Dark theme is the default and best for evening or night shifts — it reduces eye strain in dim lighting. Light theme works best during daytime and for printing or screenshots.',
+
+      lang_title: 'Languages: English & አማርኛ', lang_sub: 'Switch the entire interface instantly',
+      lang_how: 'How to switch', lang_how_body: 'Click the language button in the header. It cycles between EN (English) and አማ (Amharic). Every label, table header, form field, toast, and modal is translated.',
+      lang_what: 'What gets translated',
+      lang_what_1: 'All navigation and page titles', lang_what_2: 'Buttons, table headers, form labels',
+      lang_what_3: 'Room types, statuses, categories, zones', lang_what_4: 'Toast notifications and error messages',
+      lang_what_5: 'Receipts and printed documents', lang_what_6: 'Chart legends and month names',
+      lang_db: 'Database stays English:', lang_db_body: 'The values stored in the database (room statuses, categories, etc.) remain in English. Translation happens only at display time, so your data stays consistent regardless of the interface language.',
+
+      sc_title: 'Keyboard Shortcuts', sc_sub: 'Work faster without the mouse',
+      sc_col_action: 'Action', sc_col_keys: 'Shortcut',
+      sc_open_search: 'Focus search field', sc_close_modal: 'Close any open modal',
+      sc_close_modal_2: 'Click outside a modal', sc_submit_form: 'Submit the current form',
+      sc_print: 'Print the current page or receipt', sc_tab: 'Move between form fields',
+
+      faq_title: 'Frequently Asked Questions', faq_sub: 'Answers to the most common questions',
+      faq_q1: 'Is my data saved automatically?', faq_a1: 'Yes. Every time you save a form (room, booking, dish, etc.), the change is sent immediately to the Cloudflare D1 database. There is no separate "Save" step or draft state.',
+      faq_q2: 'Can I use the app offline?', faq_a2: 'Partially. If the network is down, the header badge changes to "D1 Offline — Local Cache" and the app loads your last cached data. You can still view everything. However, changes you make while offline won\'t sync back to the server — they stay only in your browser.',
+      faq_q3: 'Why can\'t I see the SQL Console?', faq_a3: 'The SQL Console is restricted to the Admin role. If you\'re viewing as Receptionist or Guest, the menu item is hidden. Switch roles via the dropdown in the header to access it.',
+      faq_q4: 'Can I undo a delete?', faq_a4: 'No. Deletions are permanent. The confirmation dialog exists to prevent accidents, but once you confirm, the record is gone from the D1 database. If you\'ve made a mistake, you\'ll need to re-enter the data manually.',
+      faq_q5: 'How do I know if a save worked?', faq_a5: 'A green toast appears in the bottom-right corner with a checkmark icon and a message like "Added Room 105". If something fails, you\'ll see a red toast with the error message instead.',
+      faq_q6: 'Can I add a third language?', faq_a6: 'Yes — this is a developer task. The app\'s translation dictionary lives in app.js under T.en and T.am. To add a new language (e.g. Afaan Oromoo), add a T.om key with all the same translation keys. The language button would then cycle EN → አማ → OM.',
+      faq_q7: 'What happens if the internet drops mid-save?', faq_a7: 'The save will fail and you\'ll see a red error toast. The form stays open so you can retry once the connection is restored. Nothing is half-saved — D1 transactions are atomic.',
+      faq_q8: 'Who can see the financial reports?', faq_a8: 'Only Admins. The Financial Reports module is completely hidden from Receptionists and Guests. In a production system this would also be enforced at the API level.',
+
+      ts_title: 'Common Issues', ts_sub: 'Quick fixes for frequent problems',
+      ts_offline: 'Header says "D1 Offline"', ts_offline_body: 'Cause: The Cloudflare Worker API is unreachable. Fix: Check your internet connection. Try clicking the refresh button in the header. If it persists, the API might be temporarily down — wait a few minutes and try again. You can keep using the app; changes just won\'t sync.',
+      ts_error: 'Red error toast after saving', ts_error_body: 'Cause: The database rejected the save — usually a duplicate value (room number, email) or a missing required field. Fix: Read the error message in the toast. Common issues: room numbers must be unique; email addresses must be unique; guest names, phone numbers, and dates are required for bookings.',
+      ts_mobile: 'Sidebar won\'t open on mobile', ts_mobile_body: 'Fix: Tap the menu icon in the top-left corner of the header. If it still won\'t open, refresh the page. On very small screens, the sidebar slides in from the left as an overlay — tap outside it to close.',
+      ts_charts: 'Charts are blank', ts_charts_body: 'Cause: Usually a browser issue — Chart.js failed to load from the CDN. Fix: Hard-refresh the page (Ctrl+Shift+R). If it persists, check that your network isn\'t blocking cdn.jsdelivr.net.',
+      ts_403: '"D1 must be online" message', ts_403_body: 'Cause: You tried to run a SQL query or reset the schema while the app was in offline mode. Fix: Reconnect to the internet and refresh. Only online mode can execute raw SQL or reset the schema.',
+      ts_theme: 'Theme won\'t stick', ts_theme_body: 'Cause: Your browser may be blocking localStorage (private browsing mode or strict cookie settings). Fix: Allow site data for the app\'s domain in your browser settings, or exit private browsing.',
+
+      contact_title: 'Contact Support', contact_sub: 'Still stuck? Reach out',
+      contact_phone_label: 'Front Desk Phone', contact_phone_desc: 'Available 24 / 7',
+      contact_email_label: 'Support Email', contact_email_desc: 'Response within 24 hours',
+      contact_address_label: 'Address', contact_address_desc: 'Walk-ins welcome',
+      contact_hours_label: 'Reception Hours', contact_hours_value: '24 hours · 7 days', contact_hours_desc: 'Always open',
+      contact_thanks: 'Thank you for using Asni Guest House.',
+      contact_thanks_body: 'We hope this guide helps you get the most out of the system. For technical issues specific to the software, contact the developer directly.',
+
+      no_results_title: 'No matching results', no_results_body: 'Try a different search term, or browse the sidebar categories.'
+    },
+
+    am: {
+      help_title: 'እርዳታና ድጋፍ',
+      help_sub: 'Asni Guest House ን ለመጠቀም የሚያስፈልግዎ ሁሉ',
+      back_to_app: 'ወደ መተግበሪያ ተመለስ',
+      search_placeholder: 'እርዳታ ፈልግ…',
+      version: 'ቅጂ',
+      footer_version: 'የእርዳታ ማዕከል v3.0',
+      footer_back: 'ወደ መተግበሪያ ተመለስ',
+
+      hero_kicker: 'የተጠቃሚ መመሪያ',
+      hero_title: 'እንኳን ወደ Asni Guest House በደህና መጡ',
+      hero_sub: 'የ Asni Guest House አስተዳደር ስርዓትን ለመጠቀም የተሟላ መመሪያ። ክፍሎችን፣ ቦታ ማስያዞችን፣ የምግብ ቤት ትዕዛዞችን፣ የሰራተኛ መዝገቦችንና የፋይናንስ ሪፖርቶችን እንዴት ማስተዳደር እንደሚችሉ ይማሩ።',
+      btn_get_started: 'ይጀምሩ',
+      btn_view_faq: 'ተደጋጋሚ ጥያቄዎችን ይመልከቱ',
+
+      toc_getting_started: 'መጀመር',
+      toc_features: 'ባህሪያት',
+      toc_settings: 'ቅንብሮች',
+      toc_trouble: 'ችግር መፍታት',
+
+      toc_intro: 'መግቢያ',
+      toc_start: 'መጀመር',
+      toc_roles: 'ሚናዎችና ፈቃዶች',
+      toc_dashboard: 'ዳሽቦርድ',
+      toc_rooms: 'ክፍሎችን ማስተዳደር',
+      toc_bookings: 'ቦታ ማስያዝ',
+      toc_restaurant: 'ምግብ ቤትና ትዕዛዞች',
+      toc_tables: 'የምግብ ቤት ጠረጴዛዎች',
+      toc_users: 'ተጠቃሚዎችና ሰራተኞች',
+      toc_reports: 'የፋይናንስ ሪፖርቶች',
+      toc_banners: 'ማስታወቂያዎች',
+      toc_sql: 'SQL ኮንሶል',
+      toc_theme: 'ገጽታዎች',
+      toc_lang: 'ቋንቋዎች',
+      toc_shortcuts: 'የቁልፍ ሰሌዳ አቋራጮች',
+      toc_faq: 'ተደጋጋሚ ጥያቄዎች',
+      toc_troubleshoot: 'የተለመዱ ችግሮች',
+      toc_contact: 'ድጋፍ ያግኙ',
+
+      qs_modules: 'ሞጁሎች', qs_roles: 'የተጠቃሚ ሚናዎች',
+      qs_shortcuts: 'አቋራጮች', qs_support: 'ድጋፍ',
+
+      gs_title: 'መጀመር', gs_sub: 'የመጀመሪያ 5 ደቂቃዎችዎ',
+      gs_step1_title: 'መተግበሪያውን ይክፈቱ', gs_step1_body: 'asni-guest-house.vercel.app ን በማንኛውም ዘመናዊ አሳሽ (Chrome, Edge, Firefox ወይም Safari) ይጎብኙ። መተግበሪያው ወዲያውኑ ይጫናል — ምንም ጭነት አያስፈልግም።',
+      gs_step2_title: 'ሚናዎን ይምረጡ', gs_step2_body: 'በራስጌ በላይኛው ቀኝ በኩል ያለውን የሚና ተቆልቋይ በመጠቀም በ Admin, Receptionist እና Guest እይታዎች መካከል ይቀያይሩ። የላይኛው አሞሌ ቀለምና የሚታዩ የምናሌ ዕቃዎች ወዲያውኑ ይቀየራሉ።',
+      gs_step3_title: 'የጎን አሞሌውን ያስሱ', gs_step3_body: 'የግራ ጎን አሞሌ ዋና የማውጫ መንገድዎ ነው። ወደዚያ ሞጁል ለመዝለል ማንኛውንም ዕቃ ይጫኑ። በሞባይል ላይ ለማሳየት የምናሌ አዶውን ይንኩ።',
+      gs_step4_title: 'መዝገብ ማከል ይሞክሩ', gs_step4_body: 'በክፍሎች ይጀምሩ → ክፍል ጨምር ን ይጫኑ። ቅጹን ይሙሉና ክፍል አስቀምጥ ን ይጫኑ። አረንጓዴ ማሳወቂያ ማስቀመጡን ያረጋግጣል እና አዲሱ ክፍል ወዲያውኑ በሠንጠረዡ ውስጥ ይታያል።',
+      gs_tip: 'ጠቃሚ ምክር:', gs_tip_body: 'መተግበሪያው ከመስመር ውጪም ይሰራል። ኔትወርኩ ከተቋረጠ "D1 Offline — Local Cache" በራስጌ ውስጥ ያያሉ እና ሁሉም ነገር በተቀመጠ ውሂብ ይሰራል።',
+
+      roles_title: 'ሚናዎችና ፈቃዶች', roles_sub: 'እያንዳንዱ የተጠቃሚ ዓይነት ምን ማየትና ማድረግ እንደሚችል',
+      role_admin_full: 'አስተዳዳሪ', role_recept_full: 'ተቀባይ', role_guest_full: 'እንግዳ',
+      rp_admin_dash: 'ሙሉ ዳሽቦርድ መዳረሻ', rp_admin_rooms: 'ክፍሎችን፣ ዋጋን፣ ተገኝነትን ማስተዳደር',
+      rp_admin_users: 'የሰራተኛ መዝገቦችን መፍጠርና ማሻሻል', rp_admin_bookings: 'ሙሉ የቦታ ማስያዝ ቁጥጥር',
+      rp_admin_finance: 'የፋይናንስ ሪፖርቶችና CSV ማውጣት', rp_admin_sql: 'SQL ኮንሶልና ስኪማ ማደስ',
+      rp_recept_dash: 'ዳሽቦርድ (የገቢ ዝርዝር የለም)', rp_recept_rooms: 'የክፍል ሁኔታ ማየትና ማዘመን',
+      rp_recept_users: 'ተጠቃሚዎችን ማየት (መሰረዝ የለም)', rp_recept_bookings: 'ቦታ ማስያዞችን መፍጠርና ማስተዳደር',
+      rp_recept_orders: 'የምግብ ቤትና የወጥ ቤት ትዕዛዞች', rp_recept_finance: 'የፋይናንስ ሪፖርቶች የሉም',
+      rp_recept_sql: 'የ SQL ኮንሶል መዳረሻ የለም',
+      rp_guest_dash: 'የዳሽቦርድ አጠቃላይ እይታ', rp_guest_rooms: 'የክፍል ተገኝነት ማየት',
+      rp_guest_bookings: 'የራስ ቦታ ማስያዞችን ማየት', rp_guest_menu: 'ምናሌ ማሰስና ትዕዛዝ ማስገባት',
+      rp_guest_users: 'የተጠቃሚ አስተዳደር የለም', rp_guest_finance: 'የፋይናንስ ውሂብ የለም',
+      roles_switch: 'ሚና መቀየር:', roles_switch_body: 'በራስጌ ውስጥ ያለውን ተቆልቋይ ይጠቀሙ። ምርጫዎ በክፍለ ጊዜዎች ይታወሳል። በተከለከለ ገጽ ላይ ሳለዎት ወደ Guest ከተቀየሩ በራስ-ሰር ወደ ዳሽቦርድ ይመራሉ።',
+
+      dash_help_title: 'የዳሽቦርድ አጠቃላይ እይታ', dash_help_sub: 'የእርስዎ በአንድ እይታ የትዕዛዝ ማዕከል',
+      dh_kpi: 'አራቱ የ KPI ካርዶች', dh_kpi_body: 'የላይኛው ረድፍ የቀጥታ መለኪያዎችን ያሳያል፡ ጠቅላላ ገቢ (ክፍል + ምግብ)፣ የተያዘ መጠን (በአሁኑ ጊዜ የተያዙ ክፍሎች መቶኛ)፣ ንቁ ቦታ ማስያዞች እና ያሉ የምናሌ ዕቃዎች። ውሂብ ሲጨምሩ፣ ሲያስተካክሉ ወይም ሲሰርዙ እነዚህ በራስ-ሰር ይዘመናሉ።',
+      dh_charts: 'ግራፎች', dh_charts_body: 'የገቢ አዝማሚያ መስመራዊ ግራፍ ላለፉት ስድስት ወራት ከቦታ ማስያዞችና ከትዕዛዞች የተገኘውን ገቢ ያሳያል። የክፍል ምድቦች ዶናት ግራፍ ክምችትዎ በ Standard, Deluxe, Executive Suite እና Family Suite ክፍሎች እንዴት እንደሚከፋፈል ያሳያል።',
+      dh_banner: 'የማስተዋወቂያ ባነር', dh_banner_body: 'በዳሽቦርድ ላይኛው ክፍል ያለው ባለቀለም ባነር ንቁ የማስተዋወቂያ ስላይዶችዎን ያሳያል። በጎን አሞሌ በኩል ባለው "ማስታወቂያዎች" ውስጥ ያስተዳድሩ።',
+
+      rh_title: 'ክፍሎችን ማስተዳደር', rh_sub: 'የክፍል ክምችት ማከል፣ ማሻሻልና መከታተል',
+      rh_add: 'አዲስ ክፍል ማከል',
+      rh_add_1: 'በጎን አሞሌ "ክፍሎች" ን ይጫኑ።', rh_add_2: '"ክፍል ጨምር" ቁልፍን (በላይኛው ቀኝ) ይጫኑ።',
+      rh_add_3: 'ይሙሉ፡ የክፍል ቁጥር፣ አቅም፣ የክፍል ዓይነት፣ ዋጋ በሌሊት፣ ሁኔታ እና አማራጭ መግለጫ።',
+      rh_add_4: '"ክፍል አስቀምጥ" ን ይጫኑ። ክፍሉ ወዲያውኑ በሠንጠረዡ ውስጥ ይታያል።',
+      rh_edit: 'ክፍል ማስተካከል', rh_edit_body: 'በማንኛውም የክፍል ረድፍ ላይ ሰማያዊውን የማስተካከያ ቁልፍ ይጫኑ። ቅጹ አሁን ባሉት እሴቶች ተሞልቶ ይከፈታል። ማንኛውንም ያስተካክሉና "ክፍል አስቀምጥ" ን ይጫኑ።',
+      rh_delete: 'ክፍል መሰረዝ', rh_delete_body: 'ቀዩን የመሰረዣ ቁልፍ ይጫኑ። የማረጋገጫ መልእክት ይታያል — ክፍል መሰረዝ ከእሱ ጋር የተያያዙ ቦታ ማስያዞችንም ያስወግዳል። ማስወገድ የሚችለው አስተዳዳሪ ብቻ ነው።',
+      rh_status: 'የክፍል ሁኔታዎች', rh_status_body: 'እያንዳንዱ ክፍል ከአራቱ ሁኔታዎች አንዱ አለው፣ እያንዳንዱም የራሱ ቀለም አለው፡',
+      rh_status_available: 'ለአዲስ እንግዳ ዝግጁ', rh_status_occupied: 'በአሁኑ ጊዜ የገባ እንግዳ አለው',
+      rh_status_cleaning: 'ከመውጣት በኋላ በጽዳት ላይ', rh_status_maintenance: 'በጊዜያዊነት ከአገልግሎት ውጪ',
+
+      bh_title: 'ቦታ ማስያዝና ቦታ ማስያዝ', bh_sub: 'የዕለት ተዕለት ስራዎች ልብ',
+      bh_create: 'ቦታ ማስያዝ መፍጠር',
+      bh_create_1: 'የቦታ ማስያዝ ሞጁሉን ይክፈቱ።', bh_create_2: '"አዲስ ቦታ ማስያዝ" ን ይጫኑ።',
+      bh_create_3: 'ከተቆልቋዩ ክፍል ይምረጡ። ዋጋ በሌሊት ይታያል።',
+      bh_create_4: 'የእንግዳውን ስምና ስልክ ቁጥር ያስገቡ።',
+      bh_create_5: 'የመግቢያና የመውጫ ቀኖችን ይምረጡ። ጠቅላላው በራስ-ሰር ይሰላል።',
+      bh_create_6: 'ሁኔታ ያዘጋጁና "ቦታ ማስያዝ አስቀምጥ" ን ይጫኑ።',
+      bh_grid: 'የክፍሎች ሁኔታ ፍርግርግ', bh_grid_body: 'ከቦታ ማስያዝ ሠንጠረዥ በላይ የእያንዳንዱን ክፍል ሁኔታ የሚያሳይ ባለቀለም ፍርግርግ አለ። አረንጓዴ = ነፃ፣ ቀይ = ተይዟል፣ ወርቃማ = በጽዳት ላይ፣ ወይን ጠጅ = ጥገና። እንደ ፈጣን እይታ ይጠቀሙበት።',
+      bh_autosync: 'ራስ-ሰር የክፍል ሁኔታ ዝማኔዎች', bh_autosync_body: 'የቦታ ማስያዝን ሁኔታ ወደ "ገብቷል" ሲያዘጋጁ፣ የተያያዘው ክፍል በራስ-ሰር "ተይዟል" ይሆናል። ወደ "ወጥቷል" ወይም "ተሰርዟል" ሲያዘጋጁ፣ ክፍሉ "በጽዳት ላይ" ይሆናል። ይህ የክፍል ክምችትን ያለ በእጅ ዝማኔ በተመሳሳይ ሁኔታ ያቆያል።',
+      bh_tip: 'የጊዜ ቆጣቢ:', bh_tip_body: 'በመጀመሪያ የመግቢያ ቀን፣ ከዚያም የመውጫ ቀን ይምረጡ። ከሁለቱም ቀኖች አንዱ ሲቀየር ጠቅላላው ብር እንደገና ይሰላል።',
+
+      rest_title: 'ምግብ ቤትና ትዕዛዞች', rest_sub: 'የምናሌ አስተዳደርና የወጥ ቤት ሂደት',
+      rest_menu: 'የምናሌ ካታሎግ', rest_menu_body: 'እያንዳንዱ ምግብ ምድቡን፣ የተገኝነት ሁኔታውን፣ ስሙን፣ መግለጫውንና ዋጋውን የሚያሳይ ካርድ ሆኖ ይታያል። ያሉ ምግቦች አረንጓዴ ባጅ አላቸው፤ የተደበቁ ምግቦች ቀይ ባጅ አላቸው እና በትዕዛዝ ጋሪ ውስጥ አይታዩም።',
+      rest_add: 'ምግብ ማከል',
+      rest_add_1: 'በምግብ ቤት ሞጁል ውስጥ "ምግብ ጨምር" ን ይጫኑ።', rest_add_2: 'ስሙን፣ ምድቡንና ዋጋውን በብር ያስገቡ።',
+      rest_add_3: 'ለእንግዶች መታየት ካለበት "በምናሌ ላይ አለ" ን ምልክት ያድርጉ።', rest_add_4: 'አጭር መግለጫ ያክሉና "ምግብ አስቀምጥ" ን ይጫኑ።',
+      rest_order: 'ትዕዛዝ ማስገባት',
+      rest_order_1: 'በማንኛውም የምግብ ካርድ ላይ ሮዝ ፕላስ ን ይጫኑ። ወደ ጋሪ ይታከላል።',
+      rest_order_2: 'በራስጌ ውስጥ ያለው የጋሪ ባጅ የአሁኑን የዕቃ ብዛት ያሳያል።',
+      rest_order_3: '"ጋሪ" ቁልፍን (በላይኛው ቀኝ) ይጫኑ።', rest_order_4: '"የክፍል አገልግሎት" ወይም "የምግብ ቤት ጠረጴዛ" ን ይምረጡ።',
+      rest_order_5: 'ከተቆልቋዩ ዒላማውን ክፍል ወይም ጠረጴዛ ይምረጡ።', rest_order_6: 'ጋሪውን ይገምግሙና "ትዕዛዝ አስገባ" ን ይጫኑ።',
+      rest_kitchen: 'የወጥ ቤት ትዕዛዞች ወረፋ', rest_kitchen_body: 'ከምናሌው በታች የቀጥታ ትዕዛዞች ወረፋ አለ። እያንዳንዱ የቀረበ ትዕዛዝ ዓይነቱን፣ ዒላማውን፣ የዕቃ ማጠቃለያውን፣ ጠቅላላውንና ሁኔታውን ይዞ እዚህ ይታያል። ሁኔታዎች ይራመዳሉ፡ በመጠባበቅ ላይ → በዝግጅት ላይ → ቀርቧል። ሁኔታን ለማራመድ የማስተካከያ ቁልፍን፣ ለመሰረዝ የመሰረዣ ቁልፍን ይጠቀሙ።',
+      rest_dup: 'የተደጋገሙ ዕቃዎች:', rest_dup_body: 'ተመሳሳይ ምግብ ሁለት ጊዜ መጨመር የተደጋገመ መስመር ከመፍጠር ይልቅ በጋሪ ውስጥ ብዛቱን ይጨምራል — ትላልቅ ጠረጴዛዎችን ሲያዙ በጣም ንጹህ ነው።',
+
+      th_title: 'የምግብ ቤት ጠረጴዛዎች', th_sub: 'የመመገቢያ ክፍል መቀመጫ ክምችት',
+      th_zones: 'ሦስት አካባቢዎች', th_zones_body: 'እያንዳንዱ ጠረጴዛ ከሦስቱ አካባቢዎች አንዱ ነው፡ ውስጣዊ ዋና፣ የአትክልት ቦታ ወይም የጣሪያ ማረፊያ። እያንዳንዱ የራሱ አቅምና ሁኔታ (ነፃ፣ ተይዟል፣ ተይዟል) አለው።',
+      th_add: 'ጠረጴዛ ማከል',
+      th_add_1: 'የምግብ ቤት ጠረጴዛዎች ሞጁሉን ይክፈቱ።', th_add_2: '"ጠረጴዛ ጨምር" ን ይጫኑ።',
+      th_add_3: 'የጠረጴዛ ቁጥሩን (ለምሳሌ T-01)፣ አቅም፣ አካባቢና የመጀመሪያ ሁኔታ ያስገቡ።',
+      th_add_4: '"ጠረጴዛ አስቀምጥ" ን ይጫኑ።',
+      th_integration: 'ውህደት:', th_integration_body: 'እዚህ የሚጨምሩት እያንዳንዱ ጠረጴዛ በትዕዛዝ ጋሪ ተቆልቋይ ውስጥ የሚመረጥ ዒላማ ይሆናል። በመጀመሪያ ሁሉንም ጠረጴዛዎችዎን ያክሉ፣ ከዚያ በቀጥታ ትዕዛዞችን ያስገቡ።',
+
+      uh_title: 'ተጠቃሚዎችና ሰራተኞች', uh_sub: 'ስርዓቱን ማን ማግኘት እንደሚችል ያስተዳድሩ',
+      uh_add: 'አዲስ ተጠቃሚ መመዝገብ',
+      uh_add_1: 'ተጠቃሚዎችና ሰራተኞች ሞጁሉን ይክፈቱ።', uh_add_2: '"ተጠቃሚ ጨምር" ን ይጫኑ።',
+      uh_add_3: 'ሙሉ ስም፣ ኢሜይል (ልዩ መሆን አለበት)፣ ስልክና ሚና ይሙሉ።', uh_add_4: '"ተጠቃሚ አስቀምጥ" ን ይጫኑ።',
+      uh_roles: 'ሦስቱ ሚናዎች', uh_roles_body: 'ለባለቤቶች/አስተዳዳሪዎች admin፣ ለፊት ዴስክ ሰራተኞች receptionist፣ ለጎብኚ መዝገቦች guest ይምረጡ። የእያንዳንዱን ትክክለኛ ችሎታዎች ከላይ ባለው "ሚናዎችና ፈቃዶች" ክፍል ይመልከቱ።',
+      uh_unique: 'ልዩ ኢሜይሎች:', uh_unique_body: 'እያንዳንዱ ተጠቃሚ የተለየ የኢሜይል አድራሻ ሊኖረው ይገባል። ተደጋጋሚ ለማስቀመጥ ከሞከሩ D1 ማስገባቱን ውድቅ ያደርጋል እና ቀይ የስህተት ማሳወቂያ ያያሉ።',
+
+      rep_title: 'የፋይናንስ ሪፖርቶች', rep_sub: 'የቀጥታ የገቢ ደብተርና CSV ማውጣት',
+      rep_kpi: 'የገቢ ክፍፍል', rep_kpi_body: 'በላይኛው ክፍል ሦስት የማጠቃለያ ካርዶች የክፍል ገቢን፣ የምግብ ቤት ገቢንና ጠቅላላ ድምርን ያሳያሉ። እነዚህ ከቦታ ማስያዞችና ከትዕዛዞች ሠንጠረዦች በቀጥታ ይሰላሉ — ለማስተዳደር የተለየ ደብተር የለም።',
+      rep_ledger: 'የግብይት ደብተር', rep_ledger_body: 'ከማጠቃለያው በታች እያንዳንዱ ግብይት በማጣቀሻ ቁጥሩ (B<id> ለቦታ ማስያዞች፣ O<id> ለትዕዛዞች)፣ ቀን፣ ዓይነት፣ መግለጫ፣ ከፋይና መጠን ሆኖ ይታያል። ረድፎች በቀን ተለይተው ይቀመጣሉ፣ በጣም አዲሱ መጀመሪያ።',
+      rep_csv: 'CSV ማውጣት', rep_csv_body: 'ሙሉ ደብተሩን ለተመን ሉህ ዝግጁ የሆነ ፋይል አድርጎ ለማውረድ "CSV አውጣ" ን ይጫኑ። ለተጨማሪ ትንተና በ Excel, Google Sheets ወይም Numbers ይክፈቱት።',
+      rep_receipt: 'ደረሰኞችን ማተም', rep_receipt_body: 'በማንኛውም ረድፍ ላይ የህትመት ቁልፍን በመጫን በምርት ስም ያለውን ደረሰኝ በሚታተም ቅርጸት ይክፈቱ። Ctrl+P (ወይም በ Mac Cmd+P) ን ይጫኑ ወይም "አትም" ቁልፍን ይጫኑ።',
+
+      ban_title: 'ማስታወቂያዎች', ban_sub: 'ለዳሽቦርድ የማስተዋወቂያ ስላይዶች',
+      ban_add: 'ማስታወቂያ መፍጠር',
+      ban_add_1: 'ማስታወቂያዎች ሞጁሉን ይክፈቱ።', ban_add_2: '"ማስታወቂያ ፍጠር" ን ይጫኑ።',
+      ban_add_3: 'አጭር ርዕስ፣ መግለጫና የቅናሽ መለያ ያስገቡ።',
+      ban_add_4: 'ለመለያው የባጅ ቀለም ይምረጡ።', ban_add_5: 'በዳሽቦርድ ላይ እንዲታይ "ንቁ" ን ምልክት ያድርጉ።',
+      ban_add_6: '"ማስታወቂያ አስቀምጥ" ን ይጫኑ።',
+      ban_rotate: 'ማሽከርከር:', ban_rotate_body: 'በዳሽቦርድ ላይ የሚታዩት ንቁ ማስታወቂያዎች ብቻ ናቸው። በአሁኑ ጊዜ በጣም አዲሱ ንቁ ማስታወቂያ በሄሮ አካባቢ ይታያል፤ "ንቁ" ሳጥኑን በማንሳት በማንኛውም ጊዜ ማስታወቂያን መደበቅ ይችላሉ።',
+
+      sql_title_help: 'Cloudflare D1 SQL ኮንሶል', sql_sub_help: 'የላቀ የውሂብ ቤዝ መዳረሻ — ለአስተዳዳሪ ብቻ',
+      sql_danger: 'ለአስተዳዳሪ ብቻ።', sql_danger_body: 'ይህ ሞጁል በምርት ውሂብ ቤዝዎ ላይ ጥሬ SQL ያሂዳል። መመለሻ የለም። SQL ካልተረዱት ብቻ ይጠቀሙበት።',
+      sql_run: 'ጥያቄ ማሂድ',
+      sql_run_1: 'D1 SQL ኮንሶሉን ይክፈቱ።', sql_run_2: 'SQL ዎን ወደ አርታዒው ይተይቡ (ለምሳሌ SELECT * FROM rooms;)።',
+      sql_run_3: '"ጥያቄ አሂድ" ን ይጫኑ። ውጤቶች ከታች እንደ ተቀረጸ JSON ይታያሉ።',
+      sql_examples: 'ጠቃሚ የጥያቄ ምሳሌዎች',
+      sql_reset: 'ስኪማ ማደስ', sql_reset_body: '"ስኪማ አድስ" ቁልፍ ሁሉንም ሠንጠረዦች ያጠፋልና በመጀመሪያዎቹ የአምድ ትርጓሜዎች እንደገና ይፈጥራል። ሁሉም ውሂብ ይጠፋል። ከሙከራ ወይም ከማሳያ ክፍለ ጊዜ በኋላ አዲስ ለመጀመር ሲፈልጉ ብቻ ይጠቀሙበት።',
+
+      theme_title: 'ገጽታዎች፡ ጨለማና ብሩህ', theme_sub: 'ለቀንና ለሌሊት ፈረቃዎች ምቾት',
+      theme_how: 'እንዴት መቀየር እንደሚቻል', theme_how_body: 'በራስጌ ውስጥ ያለውን የጨረቃ / ፀሐይ አዶ ይጫኑ። መተግበሪያው በሙሉ — ፓነሎች፣ ሠንጠረዦች፣ ሞዳሎች፣ ቅጾች፣ ግራፎችና ማሳወቂያዎች — ወዲያውኑ በጨለማና በብሩህ መካከል ይቀያየራል።',
+      theme_persist: 'በጉብኝቶች መካከል ይታወሳል', theme_persist_body: 'የገጽታ ምርጫዎ በአሳሽዎ ውስጥ ይቀመጣል። ወደ መተግበሪያው ሲመለሱ ተመሳሳይ ገጽታ ከመጀመሪያው ቀለም በፊት በራስ-ሰር ይጫናል — ብልጭታ የለም።',
+      theme_when: 'እያንዳንዱን መቼ መጠቀም እንዳለበት', theme_when_body: 'ጨለማ ገጽታ ነባሪ ነው እና ለምሽት ወይም ለሌሊት ፈረቃዎች በጣም ጥሩ ነው — በደካማ ብርሃን ውስጥ የዓይን ጫናን ይቀንሳል። ብሩህ ገጽታ በቀን ጊዜና ለህትመት ወይም ለስክሪን ፎቶዎች በጣም ጥሩ ነው።',
+
+      lang_title: 'ቋንቋዎች፡ እንግሊዝኛና አማርኛ', lang_sub: 'ሙሉ በይነገጹን ወዲያውኑ ይቀያይሩ',
+      lang_how: 'እንዴት መቀየር እንደሚቻል', lang_how_body: 'በራስጌ ውስጥ ያለውን የቋንቋ ቁልፍ ይጫኑ። በ EN (እንግሊዝኛ) እና በ አማ (አማርኛ) መካከል ይሽከረከራል። እያንዳንዱ መለያ፣ የሠንጠረዥ ራስጌ፣ የቅጽ መስክ፣ ማሳወቂያና ሞዳል ይተረጎማል።',
+      lang_what: 'ምን ይተረጎማል',
+      lang_what_1: 'ሁሉም የማውጫ መንገድና የገጽ ርዕሶች', lang_what_2: 'ቁልፎች፣ የሠንጠረዥ ራስጌዎች፣ የቅጽ መለያዎች',
+      lang_what_3: 'የክፍል ዓይነቶች፣ ሁኔታዎች፣ ምድቦች፣ አካባቢዎች', lang_what_4: 'የማሳወቂያ መልእክቶችና የስህተት መልእክቶች',
+      lang_what_5: 'ደረሰኞችና የታተሙ ሰነዶች', lang_what_6: 'የግራፍ አፈ ታሪኮችና የወር ስሞች',
+      lang_db: 'ውሂብ ቤዙ እንግሊዝኛ ሆኖ ይቆያል:', lang_db_body: 'በውሂብ ቤዙ ውስጥ የተከማቹ እሴቶች (የክፍል ሁኔታዎች፣ ምድቦች ወዘተ) በእንግሊዝኛ ሆነው ይቆያሉ። ትርጉም የሚከናወነው በማሳያ ጊዜ ብቻ ነው፣ ስለዚህ ውሂብዎ ከበይነገጽ ቋንቋ ጋር ተመሳሳይ ሆኖ ይቆያል።',
+
+      sc_title: 'የቁልፍ ሰሌዳ አቋራጮች', sc_sub: 'ያለ አይጥ በፍጥነት ይስሩ',
+      sc_col_action: 'ተግባር', sc_col_keys: 'አቋራጭ',
+      sc_open_search: 'የፍለጋ መስክን አተኩር', sc_close_modal: 'ማንኛውንም ክፍት ሞዳል ዝጋ',
+      sc_close_modal_2: 'ከሞዳል ውጪ ይጫኑ', sc_submit_form: 'የአሁኑን ቅጽ አስገባ',
+      sc_print: 'የአሁኑን ገጽ ወይም ደረሰኝ አትም', sc_tab: 'በቅጽ መስኮች መካከል ይንቀሳቀሱ',
+
+      faq_title: 'ተደጋጋሚ ጥያቄዎች', faq_sub: 'ለበጣም የተለመዱ ጥያቄዎች መልሶች',
+      faq_q1: 'ውሂቤ በራስ-ሰር ይቀመጣል?', faq_a1: 'አዎ። ቅጽ በሚያስቀምጡ ቁጥር (ክፍል፣ ቦታ ማስያዝ፣ ምግብ ወዘተ) ለውጡ ወዲያውኑ ወደ Cloudflare D1 ውሂብ ቤዝ ይላካል። የተለየ "አስቀምጥ" ደረጃ ወይም ረቂቅ ሁኔታ የለም።',
+      faq_q2: 'መተግበሪያውን ከመስመር ውጪ መጠቀም እችላለሁ?', faq_a2: 'በከፊል። ኔትወርኩ ከተቋረጠ የራስጌ ባጅ ወደ "D1 Offline — Local Cache" ይቀየራል እና መተግበሪያው የመጨረሻውን የተቀመጠ ውሂብ ይጭናል። ሁሉንም ማየት ይችላሉ። ሆኖም ከመስመር ውጪ ሳለ የሚያደርጉት ለውጦች ወደ አገልጋይ አይመለሱም — በአሳሽዎ ውስጥ ብቻ ይቆያሉ።',
+      faq_q3: 'የ SQL ኮንሶል ለምን አላየሁም?', faq_a3: 'የ SQL ኮንሶል ለአስተዳዳሪ ሚና ብቻ የተከለከለ ነው። እንደ ተቀባይ ወይም እንግዳ እያዩ ከሆነ የምናሌ ዕቃው ተደብቋል። ለመድረስ በራስጌ ውስጥ ባለው ተቆልቋይ ሚና ይቀያይሩ።',
+      faq_q4: 'መሰረዝን መመለስ እችላለሁ?', faq_a4: 'አይ። መሰረዞች ቋሚ ናቸው። የማረጋገጫ መልእክቱ አደጋዎችን ለመከላከል ነው፣ ግን አንዴ ካረጋገጡ መዝገቡ ከ D1 ውሂብ ቤዝ ጠፍቷል። ስህተት ከሠሩ ውሂቡን በእጅ እንደገና ማስገባት ይኖርብዎታል።',
+      faq_q5: 'ማስቀመጥ መሳካቱን እንዴት አውቃለሁ?', faq_a5: 'አረንጓዴ ማሳወቂያ በታችኛው ቀኝ ጥግ ላይ የማረጋገጫ አዶና እንደ "Added Room 105" ያለ መልእክት ይዞ ይታያል። የሆነ ነገር ካልተሳካ በምትኩ ቀይ ማሳወቂያ ከስህተት መልእክቱ ጋር ያያሉ።',
+      faq_q6: 'ሦስተኛ ቋንቋ ማከል እችላለሁ?', faq_a6: 'አዎ — ይህ የገንቢ ተግባር ነው። የመተግበሪያው የትርጉም መዝገብ በ app.js ውስጥ በ T.en እና T.am ስር ይገኛል። አዲስ ቋንቋ ለማከል (ለምሳሌ ኦሮምኛ) ተመሳሳይ የትርጉም ቁልፎች ያሉት T.om ቁልፍ ያክሉ። የቋንቋ ቁልፉ ከዚያ EN → አማ → OM ይሽከረከራል።',
+      faq_q7: 'በማስቀመጥ መሃል ኢንተርኔት ከወደቀ ምን ይሆናል?', faq_a7: 'ማስቀመጡ አይሳካም እና ቀይ የስህተት ማሳወቂያ ያያሉ። ግንኙነቱ እንደገና ሲመለስ እንደገና እንዲሞክሩ ቅጹ ክፍት ሆኖ ይቆያል። ምንም ነገር በግማሽ አይቀመጥም — የ D1 ግብይቶች አቶማዊ ናቸው።',
+      faq_q8: 'የፋይናንስ ሪፖርቶችን ማን ማየት ይችላል?', faq_a8: 'አስተዳዳሪዎች ብቻ። የፋይናንስ ሪፖርቶች ሞጁል ከተቀባዮችና ከእንግዶች ሙሉ በሙሉ ተደብቋል። በምርት ስርዓት ውስጥ ይህ በ API ደረጃም ይተገበራል።',
+
+      ts_title: 'የተለመዱ ችግሮች', ts_sub: 'ለተደጋጋሚ ችግሮች ፈጣን መፍትሄዎች',
+      ts_offline: 'ራስጌው "D1 Offline" ይላል', ts_offline_body: 'ምክንያት፡ የ Cloudflare Worker API ሊደረስበት አይችልም። መፍትሄ፡ የኢንተርኔት ግንኙነትዎን ያረጋግጡ። በራስጌ ውስጥ ያለውን የማደሻ ቁልፍ ለመጫን ይሞክሩ። ከቀጠለ API ለጊዜው ወድቆ ሊሆን ይችላል — ጥቂት ደቂቃዎች ይጠብቁና እንደገና ይሞክሩ። መተግበሪያውን መጠቀም መቀጠል ይችላሉ፤ ለውጦች ብቻ አይመሳሰሉም።',
+      ts_error: 'ከማስቀመጥ በኋላ ቀይ የስህተት ማሳወቂያ', ts_error_body: 'ምክንያት፡ ውሂብ ቤዙ ማስቀመጡን ውድቅ አድርጓል — አብዛኛውን ጊዜ ተደጋጋሚ እሴት (የክፍል ቁጥር፣ ኢሜይል) ወይም የጎደለ አስፈላጊ መስክ። መፍትሄ፡ በማሳወቂያው ውስጥ ያለውን የስህተት መልእክት ያንብቡ። የተለመዱ ችግሮች፡ የክፍል ቁጥሮች ልዩ መሆን አለባቸው፤ የኢሜይል አድራሻዎች ልዩ መሆን አለባቸው፤ የእንግዳ ስሞች፣ ስልክ ቁጥሮችና ቀኖች ለቦታ ማስያዞች ያስፈልጋሉ።',
+      ts_mobile: 'በሞባይል ላይ የጎን አሞሌው አይከፈትም', ts_mobile_body: 'መፍትሄ፡ በራስጌ በላይኛው ግራ ጥግ ያለውን የምናሌ አዶ ይንኩ። አሁንም ካልተከፈተ ገጹን ያድሱ። በጣም ትንንሽ ስክሪኖች ላይ የጎን አሞሌው ከግራ በኩል እንደ ተደራቢ ሆኖ ይንሸራተታል — ለመዝጋት ከእሱ ውጪ ይንኩ።',
+      ts_charts: 'ግራፎች ባዶ ናቸው', ts_charts_body: 'ምክንያት፡ አብዛኛውን ጊዜ የአሳሽ ችግር — Chart.js ከ CDN መጫን አልቻለም። መፍትሄ፡ ገጹን በግዳጅ ያድሱ (Ctrl+Shift+R)። ከቀጠለ ኔትወርክዎ cdn.jsdelivr.net ን እያገደ እንደሆነ ያረጋግጡ።',
+      ts_403: '"D1 መስመር ላይ መሆን አለበት" መልእክት', ts_403_body: 'ምክንያት፡ መተግበሪያው ከመስመር ውጪ ሁኔታ ላይ ሳለ SQL ጥያቄ ለማሂድ ወይም ስኪማ ለማደስ ሞክረዋል። መፍትሄ፡ ወደ ኢንተርኔት እንደገና ይገናኙና ያድሱ። በመስመር ላይ ሁኔታ ብቻ ጥሬ SQL ማሂድ ወይም ስኪማ ማደስ ይችላል።',
+      ts_theme: 'ገጽታው አይቆይም', ts_theme_body: 'ምክንያት፡ አሳሽዎ localStorage ን እያገደ ሊሆን ይችላል (የግላዊ አሰሳ ሁኔታ ወይም ጥብቅ የኩኪ ቅንብሮች)። መፍትሄ፡ በአሳሽ ቅንብሮችዎ ውስጥ ለመተግበሪያው ጎራ የጣቢያ ውሂብ ይፍቀዱ፣ ወይም ከግላዊ አሰሳ ይውጡ።',
+
+      contact_title: 'ድጋፍ ያግኙ', contact_sub: 'አሁንም ተጣብቀዋል? ያግኙን',
+      contact_phone_label: 'የፊት ዴስክ ስልክ', contact_phone_desc: 'በ24/7 ይገኛል',
+      contact_email_label: 'የድጋፍ ኢሜይል', contact_email_desc: 'በ24 ሰዓት ውስጥ ምላሽ',
+      contact_address_label: 'አድራሻ', contact_address_desc: 'ያለ ቀጠሮ እንኳን ደህና መጡ',
+      contact_hours_label: 'የመቀበያ ሰዓቶች', contact_hours_value: '24 ሰዓት · 7 ቀናት', contact_hours_desc: 'ሁልጊዜ ክፍት',
+      contact_thanks: 'Asni Guest House ን ስለተጠቀሙ እናመሰግናለን።',
+      contact_thanks_body: 'ይህ መመሪያ ስርዓቱን በተቻለ መጠን ለመጠቀም እንደሚረዳዎት ተስፋ እናደርጋለን። ከሶፍትዌሩ ጋር ለተያያዙ ቴክኒካዊ ችግሮች በቀጥታ ገንቢውን ያግኙ።',
+
+      no_results_title: 'ተመሳሳይ ውጤቶች የሉም',
+      no_results_body: 'ሌላ የፍለጋ ቃል ይሞክሩ ወይም የጎን አሞሌ ምድቦችን ያስሱ።'
+    }
+  };
+
+  function t(key) {
+    return (T[currentLang] && T[currentLang][key]) || T.en[key] || key;
+  }
+
+  /* ============================================================
+     THEME
+     ============================================================ */
+  function applyTheme(theme) {
+    currentTheme = theme;
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem(KEYS.theme, theme);
+    const icon = document.getElementById('themeIcon');
+    if (icon) icon.className = theme === 'light' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+  }
+  function toggleTheme() {
+    applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
+  }
+
+  /* ============================================================
+     LANGUAGE
+     ============================================================ */
+  function applyLang(lang) {
+    currentLang = lang;
+    localStorage.setItem(KEYS.lang, lang);
+    document.documentElement.setAttribute('lang', lang === 'am' ? 'am' : 'en');
+    document.body.classList.toggle('lang-am', lang === 'am');
+    document.getElementById('langLabel').textContent = lang === 'am' ? 'አማ' : 'EN';
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      const val = t(key);
+      if (val) el.textContent = val;
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+      const key = el.getAttribute('data-i18n-placeholder');
+      const val = t(key);
+      if (val) el.setAttribute('placeholder', val);
+    });
+  }
+  function toggleLang() {
+    applyLang(currentLang === 'en' ? 'am' : 'en');
+  }
+
+  /* ============================================================
+     SEARCH (filters TOC links + sections)
+     ============================================================ */
+  function setupSearch() {
+    const input = document.getElementById('searchInput');
+    const tocLinks = Array.from(document.querySelectorAll('.toc-link'));
+    const sections = Array.from(document.querySelectorAll('.section'));
+    const noResults = document.getElementById('noResults');
+
+    input.addEventListener('input', () => {
+      const q = input.value.trim().toLowerCase();
+      if (!q) {
+        tocLinks.forEach(l => l.classList.remove('is-hidden'));
+        sections.forEach(s => s.classList.remove('is-hidden'));
+        noResults.style.display = 'none';
+        return;
+      }
+
+      let visibleSections = 0;
+
+      tocLinks.forEach(link => {
+        const targetId = link.getAttribute('data-target');
+        const labelText = (link.textContent || '').toLowerCase();
+        const keywords = (link.getAttribute('data-keywords') || '').toLowerCase();
+        const section = document.getElementById(targetId);
+        const sectionText = section ? (section.textContent || '').toLowerCase() : '';
+        const matches = labelText.includes(q) || keywords.includes(q) || sectionText.includes(q);
+
+        link.classList.toggle('is-hidden', !matches);
+        if (section) {
+          section.classList.toggle('is-hidden', !matches);
+          if (matches) visibleSections++;
+        }
+      });
+
+      noResults.style.display = visibleSections === 0 ? 'block' : 'none';
+    });
+
+    // "/" keyboard shortcut focuses search
+    document.addEventListener('keydown', e => {
+      if (e.key === '/' && document.activeElement !== input) {
+        e.preventDefault();
+        input.focus();
+      }
+    });
+  }
+
+  /* ============================================================
+     SCROLL SPY (highlight active TOC link)
+     ============================================================ */
+  function setupScrollSpy() {
+    const main = document.getElementById('mainContent');
+    const tocLinks = Array.from(document.querySelectorAll('.toc-link'));
+
+    main.addEventListener('scroll', () => {
+      const scrollY = main.scrollTop + 100;
+      let active = null;
+      for (const link of tocLinks) {
+        const id = link.getAttribute('data-target');
+        const sec = document.getElementById(id);
+        if (sec && sec.offsetTop <= scrollY) active = link;
+      }
+      tocLinks.forEach(l => l.classList.toggle('active', l === active));
+    }, { passive: true });
+
+    tocLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const id = link.getAttribute('data-target');
+        const sec = document.getElementById(id);
+        if (sec) {
+          sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          // Close mobile sidebar
+          if (window.innerWidth <= 900) {
+            document.getElementById('sidebar').classList.remove('is-open');
+          }
+        }
+      });
+    });
+  }
+
+  /* ============================================================
+     MOBILE SIDEBAR TOGGLE
+     ============================================================ */
+  function setupMobileMenu() {
+    const btn = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+
+    btn.addEventListener('click', () => {
+      sidebar.classList.toggle('is-open');
+    });
+
+    // Close on backdrop click
+    document.addEventListener('click', e => {
+      if (window.innerWidth > 900) return;
+      if (!sidebar.classList.contains('is-open')) return;
+      if (sidebar.contains(e.target) || btn.contains(e.target)) return;
+      sidebar.classList.remove('is-open');
+    });
+  }
+
+  /* ============================================================
+     BOOT
+     ============================================================ */
+  function init() {
+    // Restore preferences
+    applyTheme(currentTheme);
+    applyLang(currentLang);
+
+    // Wire toggles
+    document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+    document.getElementById('langToggle').addEventListener('click', toggleLang);
+
+    // Setup interactions
+    setupSearch();
+    setupScrollSpy();
+    setupMobileMenu();
+
+    // Esc closes mobile sidebar
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        document.getElementById('sidebar').classList.remove('is-open');
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+</body>
+</html>
